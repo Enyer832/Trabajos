@@ -1388,13 +1388,21 @@ function sizeBg(){
 function setScene(i){ if (i === sceneIdx) return; prevIdx = sceneIdx; sceneIdx = i; sceneT = 0; }
 
 function setBg(i){
-  const url = userFotos[i] || DEFAULT_FOTOS[i];
+  const url = userFotos[i]
+    || (FOTOS_REPO[i] && repoOk[i] !== false ? FOTOS_REPO[i] : null)
+    || DEFAULT_FOTOS[i];
+  if (FOTOS_REPO[i] && !(i in repoOk)){
+    const p = new Image();
+    p.onload  = () => repoOk[i] = true;
+    p.onerror = () => { repoOk[i] = false; if (i === active) setBg(i); };
+    p.src = FOTOS_REPO[i];
+  }
   const nxt = bgLayers[curLayer ^ 1], vis = bgLayers[curLayer];
   nxt.style.backgroundImage = `url("${url}")`;
   nxt.classList.remove('show'); void nxt.offsetWidth; nxt.classList.add('show');
   vis.classList.remove('show');
   curLayer ^= 1;
-  bgWrap.classList.add('photo');   /* las partículas bajan a media intensidad */
+  bgWrap.classList.add('photo');
   setScene(i);
 }
 function bgLoop(t){
