@@ -124,12 +124,16 @@ body.mute #sndBtn .ic-soff{display:block}
 #deck{position:fixed;inset:0}
 .slide{
   position:absolute;inset:0;z-index:1;
-  display:flex;flex-direction:column;justify-content:center;
+  display:flex;flex-direction:column;
   padding:clamp(60px,9vh,110px) var(--pad-x) clamp(88px,13vh,130px);
   overflow-y:auto;scrollbar-width:none;
   opacity:0;visibility:hidden;transform:translateY(28px);
   transition:opacity .6s var(--e),transform .6s var(--e),visibility 0s .6s;
 }
+/* centrado a prueba de desbordes: estos dos espaciadores invisibles
+   reparten el espacio libre (centran el contenido cuando cabe) y
+   colapsan a cero cuando no cabe — así lo de arriba SIEMPRE se alcanza */
+.slide::before,.slide::after{content:'';flex:1 0 0;}
 .slide::-webkit-scrollbar{display:none}
 .slide.is-active{
   opacity:1;visibility:visible;transform:none;
@@ -171,7 +175,7 @@ body.mute #sndBtn .ic-soff{display:block}
 .s-dano .prose b{color:var(--danger)}
 .prose .suave{color:var(--dim);font-style:italic}
 
-/* ============ imágenes de contenido (flotan, el texto las rodea) ============ */
+/* ============ imágenes de contenido ============ */
 .c-img{
   float:right;
   width:clamp(180px,25vw,300px);
@@ -359,6 +363,20 @@ body.mute #sndBtn .ic-soff{display:block}
   font-size:clamp(16px,1.8vw,21px);color:rgba(240,244,239,.88);max-width:48ch;
 }
 
+/* aviso de que la página continúa abajo */
+.more-hint{
+  position:fixed;left:50%;bottom:clamp(16px,3.5vh,32px);
+  transform:translateX(-50%) translateY(8px);z-index:19;
+  display:flex;align-items:center;gap:10px;
+  font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);
+  background:rgba(18,26,23,.72);backdrop-filter:blur(8px);
+  border:1px solid var(--line);border-radius:99px;padding:9px 18px;
+  opacity:0;pointer-events:none;transition:.4s;
+}
+.more-hint.show{opacity:1;transform:translateX(-50%)}
+.more-hint svg{animation:hintDown 1.6s ease-in-out infinite}
+@keyframes hintDown{0%,100%{transform:translateY(-2px)}50%{transform:translateY(3px);opacity:.6}}
+
 /* ============ toast ============ */
 .toast{
   position:fixed;left:50%;bottom:110px;transform:translateX(-50%) translateY(10px);
@@ -375,13 +393,14 @@ body.mute #sndBtn .ic-soff{display:block}
   .nav-btn{width:54px;height:54px}
   .hud{padding:12px 16px}
   .cover-hint{right:auto;left:16px;bottom:88px}
+  .more-hint{bottom:12px}
   .route li{grid-template-columns:48px 1fr auto;gap:14px}
   .c-img,.c-img.left{float:none;width:min(250px,82%);margin:16px auto 6px}
   .prose,.lead{max-width:100%}
 }
 @media(prefers-reduced-motion:reduce){
   .anim,.cover-title .w span,.slide{transition-duration:.01s}
-  .cover-hint svg{animation:none}
+  .cover-hint svg,.more-hint svg{animation:none}
 }
 </style>
 </head>
@@ -426,6 +445,12 @@ body.mute #sndBtn .ic-soff{display:block}
 <div class="cover-hint" id="coverHint">
   <span>toca la flecha para avanzar</span>
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14m0 0l-6-6m6 6l-6 6"/></svg>
+</div>
+
+<!-- aviso de contenido continuo abajo -->
+<div class="more-hint" id="moreHint" aria-hidden="true">
+  <span>hay más abajo · desliza</span>
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14m0 0l6-6m-6 6l-6-6"/></svg>
 </div>
 
 <div class="toast" id="toast" role="status"></div>
@@ -729,18 +754,15 @@ body.mute #sndBtn .ic-soff{display:block}
      dano       → "Lo que la daña"
      prevencion → "Prevención"
 
-   Ejemplo:
-     const IMAGENES = { voz: 'garganta.jpg', agua: 'fotos/vaso.jpg' };
-
    Mientras estén vacías, se usan las ilustraciones dibujadas
-   por código que ya traen puestas. Se pueden cambiar también
-   los textos bajo cada imagen (figcaption en el HTML).
+   por código. Si alguna no carga, la ilustración vuelve sola
+   y arriba aparece el aviso con el nombre exacto que buscó.
    ═══════════════════════════════════════════════════════════════ */
 const FOTOS = {
   0: '',            // fondo de la portada, ej: 'mi-foto.jpg'
 };
 const IMAGENES = {
-  voz: 'fotos/voz.jpg',          // ej: 'garganta.jpg'
+  voz: 'fotos/voz.jpg',
   salud: '',
   agua: '',
   caliente: 'fotos/calentar.jpg',
@@ -834,12 +856,21 @@ prevencion: svg(
 )
 };
 
-/* montar las imágenes: la tuya si existe, si no la ilustración */
+/* montar las imágenes: la tuya si existe, si no la ilustración.
+   Si tu imagen no carga, vuelve sola la ilustración y te dice
+   el nombre exacto que buscó. */
 document.querySelectorAll('.c-img').forEach(fig => {
+  const img = fig.querySelector('img');
   const key = fig.dataset.img;
   const user = IMAGENES[key];
   const src = (user && user.trim()) ? user : ILUSTR[key];
-  if (src) fig.querySelector('img').src = src;
+  if (!src) return;
+  img.onerror = () => {
+    img.onerror = null;               /* evita repetirse */
+    img.src = ILUSTR[key];            /* rescate: vuelve la ilustración */
+    toast('No encontré "' + user + '" — revisa nombre y carpeta');
+  };
+  img.src = src;
 });
 
 /* ---- fondos estáticos por diapositiva ---- */
@@ -872,6 +903,18 @@ slides.forEach((s, i) => {
   dotsWrap.appendChild(b);
 });
 const dots = [...dotsWrap.children];
+
+/* aviso "hay más abajo" cuando la página tiene contenido oculto */
+const moreHint = document.getElementById('moreHint');
+function checkMore(){
+  const s = slides[active];
+  if (!s) return;
+  const over = s.scrollHeight - s.clientHeight > 10;
+  const atBottom = s.scrollTop >= s.scrollHeight - s.clientHeight - 10;
+  moreHint.classList.toggle('show', over && !atBottom);
+}
+slides.forEach(s => s.addEventListener('scroll', checkMore, { passive: true }));
+addEventListener('resize', checkMore);
 
 /* portada: partir el título en letras */
 (() => {
@@ -913,6 +956,8 @@ function goTo(i){
   document.getElementById('btnNext').disabled = (i === slides.length - 1);
   const hint = document.getElementById('coverHint');
   if (i === 0) hint.classList.add('show'); else hint.classList.remove('show');
+  slides[i].scrollTop = 0;               /* cada página arranca arriba */
+  requestAnimationFrame(checkMore);
 }
 const next = () => goTo(active + 1), prev = () => goTo(active - 1);
 document.getElementById('btnNext').addEventListener('click', next);
@@ -937,7 +982,7 @@ addEventListener('keydown', e => {
   else if (/^[1-9]$/.test(k) && +k <= slides.length) goTo(+k - 1);
 });
 
-/* deslizar el dedo también pasa de página (pantalla táctil) */
+/* deslizar el dedo en horizontal pasa de página; el vertical solo desplaza la página */
 let tsx = 0, tsy = 0;
 deck.addEventListener('touchstart', e => { tsx = e.touches[0].clientX; tsy = e.touches[0].clientY; }, { passive: true });
 deck.addEventListener('touchend', e => {
