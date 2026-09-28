@@ -1219,7 +1219,7 @@ function setStationImage(imgEl, fallbackEl, file, fbText) {
     fallbackEl.classList.add('show');
   };
   setTimeout(() => {
-    imgEl.src = 'educacion-fisica/imagenes/' + file;
+    imgEl.src = 'imagenes/' + file;
     if (imgEl.complete && imgEl.naturalWidth > 0) imgEl.style.opacity = '1';
     else imgEl.onload = () => { imgEl.style.opacity = '1'; };
   }, 180);
