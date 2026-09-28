@@ -1,0 +1,1497 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Educación Física — Las Capacidades Físicas</title>
+<meta name="theme-color" content="#06090C">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,500;0,700;1,700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================================
+   SISTEMA DE DISEÑO — ATHLETIC HIGH TECH & EDITORIAL
+   ========================================================================== */
+:root {
+  --ink: #06090C;
+  --panel-bg: rgba(10, 16, 22, 0.88);
+  --panel-border: rgba(0, 229, 255, 0.22);
+  --panel-glow: rgba(0, 229, 255, 0.35);
+  --text-main: #F4F8FA;
+  --text-dim: rgba(244, 248, 250, 0.72);
+  --text-muted: rgba(244, 248, 250, 0.42);
+  --cyan: #00E5FF;
+  --cyan-glow: rgba(0, 229, 255, 0.45);
+  --lime: #00FF88;
+  --lime-glow: rgba(0, 255, 136, 0.45);
+  --crimson: #FF1E46;
+  --crimson-glow: rgba(255, 30, 70, 0.55);
+  --gold: #FFB300;
+  --gold-glow: rgba(255, 179, 0, 0.5);
+  --font-d: 'Chakra Petch', sans-serif;
+  --font-b: 'Space Grotesk', -apple-system, sans-serif;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  background: var(--ink);
+  color: var(--text-main);
+  font-family: var(--font-b);
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+button { font-family: inherit; color: inherit; cursor: pointer; border: none; background: none; }
+
+.stadium-bg {
+  position: fixed; inset: 0; z-index: 0;
+  background:
+    radial-gradient(circle at 18% 22%, rgba(0, 229, 255, 0.12) 0%, transparent 48%),
+    radial-gradient(circle at 82% 78%, rgba(0, 255, 136, 0.09) 0%, transparent 52%),
+    radial-gradient(circle at 50% 50%, #0A1117 0%, #050709 100%);
+  overflow: hidden;
+}
+.court-grid {
+  position: absolute; inset: 0; opacity: 0.05;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.2) 1px, transparent 1px);
+  background-size: 50px 50px; pointer-events: none;
+}
+.grain {
+  position: absolute; inset: 0; opacity: 0.04; mix-blend-mode: overlay; pointer-events: none;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%25" height="100%25" filter="url(%23n)"/></svg>');
+}
+
+/* ==========================================================================
+   PORTADA: COMPUERTA BIOMÉTRICA
+   ========================================================================== */
+#doorsGate {
+  position: fixed; inset: 0; z-index: 100;
+  display: flex; overflow: hidden; pointer-events: auto;
+  cursor: pointer;
+  transition: opacity 0.8s var(--ease), visibility 0s 0.8s;
+}
+#doorsGate.opened { pointer-events: none; opacity: 0; visibility: hidden; }
+.gate-leaf {
+  position: relative; width: 50%; height: 100%;
+  background: linear-gradient(135deg, #10161C 0%, #080C0F 100%);
+  box-shadow: inset 0 0 80px rgba(0,0,0,0.85);
+  transition: transform 1.25s cubic-bezier(0.7, 0, 0.2, 1);
+  display: flex; align-items: center; justify-content: center;
+}
+.gate-leaf.left { border-right: 2px solid var(--cyan); }
+.gate-leaf.right { border-left: 2px solid var(--cyan); }
+#doorsGate.opened .gate-leaf.left { transform: translateX(-100%); }
+#doorsGate.opened .gate-leaf.right { transform: translateX(100%); }
+.gate-stripes {
+  position: absolute; inset: 0; opacity: 0.08;
+  background: repeating-linear-gradient(45deg, #00E5FF, #00E5FF 12px, transparent 12px, transparent 24px);
+}
+.gate-seal-center {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  z-index: 105; display: flex; flex-direction: column; align-items: center; gap: 18px;
+  text-align: center; pointer-events: auto; cursor: pointer;
+}
+.palm-scanner-btn {
+  width: 140px; height: 140px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 229, 255, 0.22) 0%, rgba(10, 16, 22, 0.95) 75%);
+  border: 3px solid var(--cyan);
+  box-shadow: 0 0 35px var(--cyan-glow), inset 0 0 20px rgba(0, 229, 255, 0.3);
+  display: grid; place-items: center;
+  transition: all 0.35s var(--ease); cursor: pointer;
+  animation: scannerBreath 2.2s infinite ease-in-out;
+}
+@keyframes scannerBreath { 50% { transform: scale(1.06); box-shadow: 0 0 50px rgba(0, 229, 255, 0.7); } }
+.palm-scanner-btn:hover { transform: scale(1.12); border-color: var(--lime); box-shadow: 0 0 60px var(--lime-glow); }
+.palm-scanner-btn:active { transform: scale(0.94); }
+.scanner-svg-icon { width: 68px; height: 68px; filter: drop-shadow(0 0 8px var(--cyan)); }
+.scanner-label {
+  font-family: var(--font-d); font-size: 15px; font-weight: 700;
+  letter-spacing: 0.24em; text-transform: uppercase; color: var(--text-main);
+  background: rgba(10, 16, 22, 0.85); padding: 10px 26px; border-radius: 99px;
+  border: 1px solid var(--panel-border); cursor: pointer;
+}
+
+
+/* ==========================================================================
+   HUD
+   ========================================================================== */
+.hud-top {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: clamp(14px, 2.5vh, 24px) clamp(22px, 3.8vw, 54px);
+  pointer-events: none;
+}
+.hud-top > * { pointer-events: auto; }
+.badge-sport {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: rgba(10, 16, 22, 0.75); backdrop-filter: blur(14px);
+  border: 1px solid var(--panel-border); border-radius: 99px;
+  padding: 8px 20px; box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+}
+.beacon {
+  width: 9px; height: 9px; border-radius: 50%;
+  background: var(--lime); box-shadow: 0 0 10px var(--lime);
+  animation: beaconPulse 1.8s infinite ease-in-out;
+}
+@keyframes beaconPulse { 50% { transform: scale(1.4); opacity: 0.6; } }
+.badge-sport span {
+  font-family: var(--font-d); font-size: 13px; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase; color: var(--cyan);
+}
+.hud-actions { display: flex; gap: 12px; }
+.btn-circle {
+  width: 48px; height: 48px; border-radius: 50%;
+  background: rgba(10, 16, 22, 0.75); backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: grid; place-items: center; transition: 0.25s var(--ease);
+}
+.btn-circle:hover { border-color: var(--cyan); transform: scale(1.08); }
+.btn-circle:active { transform: scale(0.92); }
+body.muted .ic-son { display: none; }
+body:not(.muted) .ic-soff { display: none; }
+body.is-fullscreen .ic-fs-enter { display: none; }
+body:not(.is-fullscreen) .ic-fs-exit { display: none; }
+
+.progress-track {
+  position: fixed; top: 0; left: 0; right: 0; height: 4px; z-index: 60;
+  background: rgba(255, 255, 255, 0.08);
+}
+#pBar {
+  height: 100%; width: 0;
+  background: linear-gradient(90deg, var(--cyan), var(--lime));
+  box-shadow: 0 0 12px var(--cyan-glow);
+  transition: width 0.55s var(--ease);
+}
+
+.dots-left-rail {
+  position: fixed; left: clamp(14px, 2.4vw, 34px); top: 50%; transform: translateY(-50%);
+  z-index: 50; display: flex; flex-direction: column; gap: 14px;
+}
+.dot-pill { width: 32px; height: 32px; display: grid; place-items: center; position: relative; }
+.dot-pill::before {
+  content: ''; width: 8px; height: 8px; border-radius: 50%;
+  background: rgba(255, 255, 255, 0.22); transition: all 0.35s var(--ease);
+}
+.dot-pill.active::before {
+  width: 14px; height: 14px; background: var(--cyan);
+  box-shadow: 0 0 16px var(--cyan);
+}
+.dot-pill:hover::before { background: var(--cyan); }
+
+.hud-bottom {
+  position: fixed; bottom: clamp(18px, 3.5vh, 38px); right: clamp(22px, 3.8vw, 54px);
+  z-index: 50; display: flex; align-items: center; gap: 14px; pointer-events: none;
+}
+.hud-bottom > * { pointer-events: auto; }
+.page-counter {
+  font-family: var(--font-d); font-size: 15px; letter-spacing: 0.16em;
+  color: var(--text-dim); background: rgba(10, 16, 22, 0.75); backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.1); padding: 12px 20px; border-radius: 99px;
+}
+.page-counter b { color: var(--cyan); font-size: 18px; }
+.nav-touch-btn {
+  width: 68px; height: 68px; border-radius: 50%;
+  background: rgba(8, 14, 20, 0.86); backdrop-filter: blur(16px);
+  border: 1px solid var(--panel-border);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.12);
+  display: grid; place-items: center; transition: all 0.25s var(--ease);
+}
+.nav-touch-btn:hover {
+  border-color: var(--cyan); box-shadow: 0 12px 36px rgba(0,0,0,0.8), 0 0 24px var(--cyan-glow);
+  transform: scale(1.06);
+}
+.nav-touch-btn:active { transform: scale(0.92); }
+.nav-touch-btn:disabled { opacity: 0.22; cursor: default; transform: none; box-shadow: none; border-color: rgba(255,255,255,0.1); }
+
+/* ==========================================================================
+   DIAPOSITIVAS
+   ========================================================================== */
+#deck { position: fixed; inset: 0; z-index: 20; }
+.slide {
+  position: absolute; inset: 0;
+  display: flex; align-items: center;
+  padding: clamp(65px, 9vh, 105px) clamp(26px, 5.5vw, 100px) clamp(85px, 12vh, 125px) clamp(65px, 6.8vw, 115px);
+  opacity: 0; visibility: hidden; transform: translateY(30px);
+  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease), visibility 0s 0.6s;
+  overflow-y: auto; scrollbar-width: none;
+}
+.slide::-webkit-scrollbar { display: none; }
+.slide.active {
+  opacity: 1; visibility: visible; transform: none;
+  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease), visibility 0s 0s;
+}
+.editorial-panel {
+  background: var(--panel-bg);
+  backdrop-filter: blur(24px);
+  border: 1px solid var(--panel-border);
+  border-radius: 26px;
+  padding: clamp(24px, 3.5vw, 42px);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  width: 100%;
+}
+.kicker {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--font-d); font-size: 13px; font-weight: 700;
+  letter-spacing: 0.24em; text-transform: uppercase; color: var(--cyan);
+  margin-bottom: 12px;
+}
+.kicker::before {
+  content: ''; width: 20px; height: 2px; background: var(--cyan); box-shadow: 0 0 8px var(--cyan);
+}
+.h1-hero {
+  font-family: var(--font-d); font-size: clamp(32px, 4.4vw, 62px);
+  font-weight: 700; line-height: 1.05; text-transform: uppercase;
+  letter-spacing: -0.015em; margin-bottom: 18px;
+}
+.h1-hero em { font-style: normal; color: var(--cyan); text-shadow: 0 0 20px var(--cyan-glow); }
+.prose {
+  font-size: clamp(16px, 1.55vw, 19px); line-height: 1.72;
+  color: var(--text-dim); max-width: 74ch;
+}
+.prose p { margin-bottom: 16px; }
+.prose p:last-child { margin-bottom: 0; }
+.prose b, .prose strong { color: var(--text-main); font-weight: 600; }
+.prose mark {
+  background: rgba(0, 229, 255, 0.12); color: var(--cyan);
+  padding: 2px 8px; border-radius: 6px; font-weight: 600;
+}
+
+.cover-hero-grid {
+  display: grid; grid-template-columns: 1fr 340px; gap: 32px;
+  align-items: center; text-align: left;
+}
+@media(max-width:900px){ .cover-hero-grid{ grid-template-columns:1fr; } }
+.telemetry-deck-card {
+  background: rgba(0, 0, 0, 0.5); border: 1px solid var(--panel-border);
+  border-radius: 20px; padding: 20px; display: flex; flex-direction: column; gap: 14px;
+}
+.telemetry-row {
+  display: flex; justify-content: space-between; align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 8px;
+}
+.telemetry-row:last-child { border-bottom: none; padding-bottom: 0; }
+.t-tag { font-family: var(--font-d); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); }
+.t-val { font-family: var(--font-d); font-size: 17px; font-weight: 700; color: var(--cyan); }
+
+.track-circuit-wrap {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px; margin-top: 24px;
+}
+.circuit-checkpoint {
+  background: rgba(0, 0, 0, 0.45); border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px; padding: 20px 18px; position: relative;
+  overflow: hidden; cursor: pointer; transition: all 0.3s var(--ease);
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.circuit-checkpoint::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--text-muted); transition: background 0.3s;
+}
+.circuit-checkpoint:hover {
+  transform: translateY(-5px); border-color: var(--cyan);
+  background: rgba(0, 229, 255, 0.08); box-shadow: 0 12px 30px rgba(0, 229, 255, 0.15);
+}
+.circuit-checkpoint:hover::before { background: var(--cyan); box-shadow: 0 0 10px var(--cyan); }
+.cp-km { font-family: var(--font-d); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cyan); margin-bottom: 6px; }
+.cp-title { font-family: var(--font-d); font-size: 18px; font-weight: 700; text-transform: uppercase; margin-bottom: 6px; }
+.cp-athlete { font-size: 13px; color: var(--text-dim); display: flex; align-items: center; gap: 6px; }
+
+.body-layout-grid {
+  display: grid; grid-template-columns: minmax(320px, 440px) 1fr;
+  gap: clamp(20px, 3.5vw, 50px); align-items: center;
+  width: 100%; max-width: 1380px; margin: 0 auto;
+}
+@media(max-width:980px){ .body-layout-grid{ grid-template-columns:1fr; } }
+.model3d-container {
+  position: relative; background: rgba(4, 8, 12, 0.85);
+  border: 1px solid var(--panel-border); border-radius: 26px;
+  padding: 12px; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  box-shadow: inset 0 0 45px rgba(0, 229, 255, 0.1);
+  min-height: 440px; width: 100%;
+}
+.model3d-container img {
+  width: 100%; height: 100%; min-height: 420px; object-fit: contain;
+  border-radius: 20px; transition: opacity 0.35s ease; display: block;
+}
+.img-fallback {
+  display: none; position: absolute; inset: 0;
+  border-radius: 20px; z-index: 2;
+  background:
+    repeating-linear-gradient(45deg, rgba(0,229,255,.05) 0 14px, transparent 14px 28px),
+    radial-gradient(circle, rgba(0,229,255,.08), transparent 70%);
+  align-items: center; justify-content: center; text-align: center;
+  font-family: var(--font-d); font-weight: 700; text-transform: uppercase;
+  letter-spacing: .3em; color: var(--cyan); padding: 20px;
+}
+.img-fallback.show { display: flex; }
+.capacity-card-view {
+  background: rgba(0, 0, 0, 0.35); border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px; padding: 24px; min-height: 220px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.capacity-card-view h3 {
+  font-family: var(--font-d); font-size: clamp(22px, 2.4vw, 32px);
+  text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 8px;
+  display: flex; align-items: center; gap: 12px;
+}
+.capacity-card-view .meta-badge {
+  display: inline-block; font-size: 12px; font-family: var(--font-d);
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--cyan);
+  background: rgba(0, 229, 255, 0.1); padding: 4px 10px; border-radius: 6px;
+  margin-bottom: 12px; width: fit-content;
+}
+.station-btn {
+  background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 10px 18px; border-radius: 99px; font-family: var(--font-d);
+  font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  transition: all 0.25s var(--ease);
+}
+.station-btn.active {
+  background: var(--cyan); color: #04080A; border-color: var(--cyan);
+  box-shadow: 0 0 16px var(--cyan-glow);
+}
+.station-btn.lime.active {
+  background: var(--lime); color: #04080A; border-color: var(--lime);
+  box-shadow: 0 0 16px var(--lime-glow);
+}
+
+/* ==========================================================================
+   JUEGO FINAL: BATAK VERSUS
+   ========================================================================== */
+.batak-versus-arena {
+  width: 100%; max-width: 1100px; margin: 0 auto; text-align: center;
+  background: rgba(8, 12, 16, 0.9); backdrop-filter: blur(28px);
+  border: 2px solid var(--panel-border); border-radius: 28px;
+  padding: clamp(20px, 3.2vw, 38px);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.9), 0 0 40px rgba(0, 229, 255, 0.14);
+}
+.versus-scoreboard {
+  display: flex; justify-content: space-around; align-items: center;
+  background: rgba(0, 0, 0, 0.5); border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px; padding: 12px 24px; margin: 14px 0 20px;
+}
+.vs-player-badge { display: flex; flex-direction: column; align-items: center; }
+.vs-name { font-family: var(--font-d); font-size: 14px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 2px; }
+.vs-score { font-family: var(--font-d); font-size: 40px; font-weight: 700; letter-spacing: 0.04em; line-height: 1; }
+.vs-timer-box { display: flex; flex-direction: column; align-items: center; }
+.vs-time-val { font-family: var(--font-d); font-size: 34px; font-weight: 700; color: var(--gold); letter-spacing: 0.04em; }
+.versus-duel-stage {
+  display: grid; grid-template-columns: 1fr 1fr; gap: clamp(16px, 3vw, 32px); margin-bottom: 20px;
+}
+@media(max-width:700px){ .versus-duel-stage{ grid-template-columns:1fr; } }
+.player-court {
+  background: rgba(0, 0, 0, 0.35); border-radius: 20px;
+  padding: 16px; border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.player-court.p1 { border-color: rgba(0, 229, 255, 0.3); }
+.player-court.p2 { border-color: rgba(0, 255, 136, 0.3); }
+.grid-batak-versus {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 10px;
+}
+.node-v {
+  height: clamp(68px, 10vh, 88px); border-radius: 16px;
+  background: rgba(255, 255, 255, 0.04); border: 2px solid rgba(255, 255, 255, 0.12);
+  display: grid; place-items: center; transition: all 0.12s var(--ease);
+}
+.node-bulb { width: 24px; height: 24px; border-radius: 50%; background: rgba(255, 255, 255, 0.12); }
+.node-v.target-green {
+  background: rgba(0, 255, 136, 0.22); border-color: var(--lime);
+  box-shadow: 0 0 24px var(--lime-glow); transform: scale(1.05);
+  animation: greenPulse 1.1s infinite ease-in-out;
+}
+@keyframes greenPulse { 50% { box-shadow: 0 0 34px var(--lime-glow); } }
+.node-v.target-green .node-bulb { background: var(--lime); box-shadow: 0 0 20px var(--lime); }
+.node-v.target-red {
+  background: rgba(255, 30, 70, 0.25); border-color: var(--crimson);
+  box-shadow: 0 0 24px var(--crimson-glow); transform: scale(1.05);
+}
+.node-v.target-red .node-bulb { background: var(--crimson); box-shadow: 0 0 20px var(--crimson); }
+.node-v:active { transform: scale(0.92); }
+.btn-game-trigger {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: var(--lime); color: #04080A; font-family: var(--font-d);
+  font-size: 16px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 16px 36px; border-radius: 99px; box-shadow: 0 10px 28px var(--lime-glow);
+  transition: all 0.25s var(--ease);
+}
+.btn-game-trigger:hover { transform: scale(1.05); }
+.btn-unlock-podium {
+  display: none; align-items: center; gap: 12px;
+  background: linear-gradient(135deg, #FFB300, #FF8F00);
+  color: #06090C; font-family: var(--font-d); font-size: 17px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase; padding: 18px 42px; border-radius: 99px;
+  box-shadow: 0 12px 34px rgba(255, 179, 0, 0.45); transition: all 0.3s;
+}
+.btn-unlock-podium.show { display: inline-flex; animation: pulseGold 1.6s infinite alternate; }
+@keyframes pulseGold {
+  from { transform: scale(1); box-shadow: 0 12px 30px rgba(255, 179, 0, 0.4); }
+  to { transform: scale(1.06); box-shadow: 0 16px 45px rgba(255, 179, 0, 0.8); }
+}
+
+/* ==========================================================================
+   CIERRE: EL VIDEOMARCADOR DEL ESTADIO (LED)
+   ========================================================================== */
+#scoreboardOverlay {
+  position: fixed; inset: 0; z-index: 95;
+  background: #010306;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none; transition: opacity 0.5s;
+  padding: 20px;
+}
+#scoreboardOverlay.active { opacity: 1; pointer-events: auto; }
+.sb-stadium-screen {
+  position: relative;
+  width: min(980px, 96vw);
+  border-radius: 18px;
+  background: #04070a;
+  border: 3px solid #1a2530;
+  box-shadow: 0 40px 110px rgba(0,0,0,.95), 0 0 70px rgba(0,229,255,.07), inset 0 0 70px rgba(0,0,0,.9);
+  overflow: hidden;
+  opacity: 0;
+  transform: scaleY(.02) scaleX(.55);
+}
+#scoreboardOverlay.active .sb-stadium-screen {
+  animation: screenPowerOn .75s cubic-bezier(.2,.8,.3,1) .15s forwards;
+}
+@keyframes screenPowerOn {
+  0% { opacity: .4; transform: scaleY(.02) scaleX(.55); filter: brightness(3.5); }
+  55% { opacity: 1; transform: scaleY(1) scaleX(1); filter: brightness(2); }
+  100% { opacity: 1; transform: none; filter: brightness(1); }
+}
+.sb-stadium-screen::before {
+  content: ''; position: absolute; inset: 0; z-index: 8;
+  background-image: radial-gradient(circle, transparent 1.4px, rgba(0,0,0,.5) 1.5px);
+  background-size: 5px 5px; pointer-events: none;
+}
+.sb-stadium-screen::after {
+  content: ''; position: absolute; inset: 0; z-index: 9;
+  background: repeating-linear-gradient(0deg, rgba(0,0,0,.2) 0 2px, transparent 2px 5px);
+  pointer-events: none;
+}
+.sb-inner { position: relative; z-index: 5; padding: clamp(20px, 3vw, 34px) clamp(18px, 3vw, 36px) 0; }
+.sb-live-strip {
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: var(--font-d); font-size: 11px; font-weight: 700;
+  letter-spacing: .3em; color: var(--crimson); text-transform: uppercase;
+  padding-bottom: 12px; border-bottom: 1px solid rgba(255,30,70,.25);
+  text-shadow: 0 0 10px var(--crimson-glow);
+}
+.sb-live-strip .live-dot { animation: liveBlink 1s steps(1) infinite; }
+@keyframes liveBlink { 50% { opacity: 0; } }
+.led-line {
+  font-family: var(--font-d); font-weight: 700; text-transform: uppercase;
+  letter-spacing: .14em; text-align: center; line-height: 1.15;
+  color: #FFD54A;
+  text-shadow: 0 0 10px rgba(255,200,60,.8), 0 0 30px rgba(255,160,0,.4);
+  min-height: 1.2em;
+}
+.led-line .ch { opacity: 0; }
+.led-line .ch.on { opacity: 1; }
+#ledTitle { font-size: clamp(30px, 4.6vw, 54px); margin-top: 18px; }
+.sb-result {
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+  gap: 18px; margin: 20px 0 6px;
+  opacity: 0; transform: translateY(14px); transition: all .6s var(--ease);
+}
+.sb-result.in { opacity: 1; transform: none; }
+.sb-side { text-align: center; }
+.sb-side .rs-name {
+  font-family: var(--font-d); font-size: 14px; font-weight: 700;
+  letter-spacing: .18em; color: var(--text-dim); text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.sb-side .rs-score { font-family: var(--font-d); font-size: clamp(64px, 9vw, 96px); font-weight: 700; line-height: 1; }
+.sb-side.p1 .rs-score { color: var(--cyan); text-shadow: 0 0 26px var(--cyan-glow); }
+.sb-side.p2 .rs-score { color: var(--lime); text-shadow: 0 0 26px var(--lime-glow); }
+.sb-score-sep { font-family: var(--font-d); font-size: 44px; color: rgba(255,255,255,.2); }
+.sb-winner-line {
+  text-align: center; font-family: var(--font-d); font-weight: 700;
+  letter-spacing: .22em; text-transform: uppercase; font-size: clamp(16px, 2vw, 22px);
+  color: var(--gold); text-shadow: 0 0 18px var(--gold-glow);
+  min-height: 1.6em; margin-bottom: 4px; opacity: 0;
+}
+.sb-winner-line.in { opacity: 1; animation: winnerBlink 1.15s steps(2) infinite; }
+@keyframes winnerBlink { 50% { opacity: .25; } }
+.sb-mvp { margin-top: 20px; }
+.sb-mvp-title { font-size: 15px; letter-spacing: .3em; margin-bottom: 14px; min-height: 1.2em; }
+.mvp-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+@media(max-width:700px){ .mvp-row{ grid-template-columns:1fr; gap:10px; } }
+.mvp-card {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(0,229,255,.3);
+  border-radius: 14px; padding: 16px 12px; text-align: center;
+  opacity: 0; transform: translateY(16px); transition: all .5s var(--ease);
+}
+.mvp-card.in { opacity: 1; transform: none; }
+.mvp-pos { font-family: var(--font-d); font-size: 10px; font-weight: 700; letter-spacing: .28em; color: var(--text-muted); text-transform: uppercase; }
+.mvp-name { font-family: var(--font-d); font-size: 22px; font-weight: 700; color: #fff; margin: 6px 0 2px; text-shadow: 0 0 14px rgba(255,255,255,.25); }
+.mvp-role { font-size: 11px; color: var(--text-dim); letter-spacing: .06em; }
+.mvp-rating {
+  margin-top: 10px; display: inline-block;
+  font-family: var(--font-d); font-weight: 700; font-size: 26px;
+  color: var(--gold); text-shadow: 0 0 14px var(--gold-glow);
+}
+.sb-ticker {
+  margin-top: 24px; border-top: 1px solid rgba(255,255,255,.12);
+  padding: 12px 0 16px; overflow: hidden; white-space: nowrap;
+}
+.sb-ticker-track {
+  display: inline-block;
+  font-family: var(--font-d); font-weight: 700; letter-spacing: .22em;
+  font-size: 15px; text-transform: uppercase;
+  color: #FFD54A; text-shadow: 0 0 10px rgba(255,200,60,.6);
+}
+.sb-ticker.run .sb-ticker-track { animation: tickerRun 20s linear infinite; }
+@keyframes tickerRun { to { transform: translateX(-50%); } }
+.sb-actions { text-align: center; margin-top: 26px; opacity: 0; transition: opacity .6s; }
+.sb-actions.in { opacity: 1; }
+.btn-restart-session {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.25);
+  color: var(--text-main); font-family: var(--font-d); font-size: 14px; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase;
+  padding: 14px 34px; border-radius: 99px; transition: all .25s;
+}
+.btn-restart-session:hover { border-color: var(--cyan); color: var(--cyan); box-shadow: 0 0 22px var(--cyan-glow); }
+.btn-restart-session:active { transform: scale(.95); }
+</style>
+</head>
+<body>
+
+<!-- Fondo atlético -->
+<div class="stadium-bg">
+  <div class="court-grid"></div>
+  <div class="grain"></div>
+</div>
+
+<div class="progress-track"><div id="pBar"></div></div>
+
+<!-- HUD superior -->
+<header class="hud-top">
+  <div class="badge-sport">
+    <div class="beacon"></div>
+    <span>Educación Física · Biomecánica 🏃‍♂️🏎️⚡</span>
+  </div>
+  <div class="hud-actions">
+    <button class="btn-circle" id="sndBtn" aria-label="Silenciar sonido">
+      <svg class="ic-son" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+      <svg class="ic-soff" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+    </button>
+    <button class="btn-circle" id="fsBtn" aria-label="Pantalla completa">
+      <svg class="ic-fs-enter" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+      <svg class="ic-fs-exit" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- Dots -->
+<nav class="dots-left-rail" id="dotsRail" aria-label="Navegación lateral"></nav>
+
+<!-- HUD inferior -->
+<footer class="hud-bottom">
+  <div class="page-counter">
+    <span id="curNum">01</span> / <span id="totNum">06</span>
+  </div>
+  <button class="nav-touch-btn" id="btnPrev" aria-label="Anterior">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+  </button>
+  <button class="nav-touch-btn" id="btnNext" aria-label="Siguiente">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+  </button>
+</footer>
+
+<!-- COMPUERTA BIOMÉTRICA -->
+<div id="doorsGate">
+  <div class="gate-leaf left"><div class="gate-stripes"></div></div>
+  <div class="gate-leaf right"><div class="gate-stripes"></div></div>
+  <div class="gate-seal-center" id="sealCenter">
+    <button class="palm-scanner-btn" id="btnScanPalm" aria-label="Escanear mano para abrir vestuario">
+      <svg class="scanner-svg-icon" viewBox="0 0 24 24" fill="none" stroke="#00E5FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 11V6a2 2 0 0 0-4 0v5"/>
+        <path d="M14 10V4a2 2 0 0 0-4 0v6"/>
+        <path d="M10 10.5V6a2 2 0 0 0-4 0v8"/>
+        <path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-16 0v-2"/>
+        <path d="M6 14v-2a2 2 0 1 1 4 0"/>
+      </svg>
+    </button>
+    <div class="scanner-label" id="scannerLabel">TOCAR PARA DESBLOQUEAR SESIÓN</div>
+  </div>
+</div>
+
+<main id="deck">
+
+  <!-- 0 · PORTADA -->
+  <section class="slide active">
+    <div class="editorial-panel" style="max-width: 1100px; margin: 0 auto;">
+      <div class="cover-hero-grid">
+        <div>
+          <span class="kicker">Análisis Biomecánico & Alto Rendimiento</span>
+          <h1 class="h1-hero">Las <em>Capacidades</em> Físicas</h1>
+          <div class="prose" style="margin-bottom: 24px;">
+            <p>
+              El movimiento humano no es casualidad: es la sincronización milimétrica entre el <b>combustible de nuestros músculos</b> y la <b>precisión de nuestro sistema nervioso</b>.
+            </p>
+          </div>
+
+          <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 24px;">
+            <div style="background: rgba(255,255,255,0.05); border: 1px solid var(--panel-border); padding: 10px 18px; border-radius: 14px; font-family: var(--font-d); font-weight: 700;">
+              ⚡ Guelmi <span style="font-size: 11px; color: var(--cyan); display: block; font-weight: 500;">Bases y Clasificación</span>
+            </div>
+            <div style="background: rgba(255,255,255,0.05); border: 1px solid var(--lime); padding: 10px 18px; border-radius: 14px; font-family: var(--font-d); font-weight: 700;">
+              🏃‍♂️ Ribert <span style="font-size: 11px; color: var(--lime); display: block; font-weight: 500;">condicionales</span>
+            </div>
+            <div style="background: rgba(255,255,255,0.05); border: 1px solid var(--cyan); padding: 10px 18px; border-radius: 14px; font-family: var(--font-d); font-weight: 700;">
+              🏎️ Enyer <span style="font-size: 11px; color: var(--cyan); display: block; font-weight: 500;">coordinativas F1</span>
+            </div>
+          </div>
+
+          <button class="btn-game-trigger" id="btnGoToIndex" style="background: var(--cyan); box-shadow: 0 10px 28px var(--cyan-glow);">
+            <span>Ver Circuito Táctico (Índice)</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+
+        <div class="telemetry-deck-card">
+          <div class="telemetry-row">
+            <span class="t-tag">Potencia Máxima</span>
+            <span class="t-val" style="color: var(--lime);">1,240 W</span>
+          </div>
+          <div class="telemetry-row">
+            <span class="t-tag">Tiempo Reacción F1</span>
+            <span class="t-val" style="color: var(--cyan);">150 ms</span>
+          </div>
+          <div class="telemetry-row">
+            <span class="t-tag">Frecuencia Cardíaca</span>
+            <span class="t-val" style="color: #FF5555;" id="tvHeart">185 BPM</span>
+          </div>
+          <div class="telemetry-row">
+            <span class="t-tag">Diferenciación Motora</span>
+            <span class="t-val">99.4%</span>
+          </div>
+          <div class="telemetry-row">
+            <span class="t-tag">Metabolismo Activo</span>
+            <span class="t-val" style="color: var(--gold);">ATP-PC</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 1 · ÍNDICE -->
+  <section class="slide">
+    <div class="editorial-panel" style="max-width: 1180px; margin: 0 auto;">
+      <span class="kicker">Mapa de Ruta de la Sesión</span>
+      <h2 class="h1-hero">Circuito <em>Táctico</em> de la Exposición</h2>
+      <p class="prose" style="margin-bottom: 18px;">
+        Toca cualquier posta del circuito para saltar directamente a esa estación deportiva:
+      </p>
+
+      <div class="track-circuit-wrap">
+        <div class="circuit-checkpoint" data-jump="2">
+          <div>
+            <div class="cp-km">Posta 01 · Km 0.0</div>
+            <div class="cp-title">Capacidades Físicas</div>
+          </div>
+          <div class="cp-athlete">⚡ Guelmi · Concepto & División</div>
+        </div>
+
+        <div class="circuit-checkpoint" data-jump="3" style="border-color: rgba(0, 255, 136, 0.3);">
+          <div>
+            <div class="cp-km" style="color: var(--lime);">Posta 02 · Km 2.5</div>
+            <div class="cp-title">Condicionales</div>
+          </div>
+          <div class="cp-athlete">🏃‍♂️ Ribert · 4 Condicionales en Vivo</div>
+        </div>
+
+        <div class="circuit-checkpoint" data-jump="4" style="border-color: rgba(0, 229, 255, 0.3);">
+          <div>
+            <div class="cp-km" style="color: var(--cyan);">Posta 03 · Km 5.0</div>
+            <div class="cp-title">Coordinativas</div>
+          </div>
+          <div class="cp-athlete">🏎️ Enyer · F1 & Coordinación</div>
+        </div>
+
+        <div class="circuit-checkpoint" data-jump="5" style="border-color: var(--lime); background: rgba(0, 255, 136, 0.08);">
+          <div>
+            <div class="cp-km" style="color: var(--lime);">Meta · Duelo Final</div>
+            <div class="cp-title">Juego Final</div>
+          </div>
+          <div class="cp-athlete">⚡ Desafío de 2 Alumnos en Vivo</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · GUELMI -->
+  <section class="slide">
+    <div class="editorial-panel" style="max-width: 1050px; margin: 0 auto;">
+      <span class="kicker">Estación 01 · Guelmi ⚡</span>
+      <h2 class="h1-hero">¿Qué son las <em>Capacidades Físicas</em>?</h2>
+
+      <div class="prose">
+        <p>
+          Las <b>capacidades físicas</b> son el conjunto de condiciones orgánicas, anatómicas y fisiológicas que tiene el cuerpo humano para ejecutar cualquier trabajo motor. Desde levantar una mochila hasta esprintar 100 metros llanos, no dependen del azar: se heredan en la genética y se perfeccionan con el entrenamiento metódico.
+        </p>
+        <p>
+          En la ciencia del deporte se dividen en dos universos interconectados:
+        </p>
+        <p>
+          1. <mark>Capacidades Condicionales:</mark> Gobiernan el rendimiento energético. Dependen de la cantidad de oxígeno, glucógeno y ATP que los músculos pueden quemar para generar tensión mecánica o soportar el esfuerzo.
+        </p>
+        <p>
+          2. <mark>Capacidades Coordinativas:</mark> Gobiernan el control del sistema nervioso. Determinan cómo el cerebro interpreta las señales de los ojos y el oído interno, coordinando milimétricamente la contracción muscular en el tiempo y el espacio.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · RIBERT -->
+  <section class="slide">
+    <div class="body-layout-grid">
+      <div class="model3d-container">
+        <img id="imgRibert" src="../imagenes/resistencia.jpg" alt="Capacidad física">
+        <div class="img-fallback" id="fbRibert">RESISTENCIA</div>
+      </div>
+
+      <div class="editorial-panel">
+        <span class="kicker">Estación 02 · Ribert 🏃‍♂️</span>
+        <h2 class="h1-hero">Capacidades <em>Condicionales</em></h2>
+
+        <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px;">
+          <button class="station-btn lime active" data-rib="resistencia">🫀 Resistencia</button>
+          <button class="station-btn lime" data-rib="fuerza">⚡ Fuerza</button>
+          <button class="station-btn lime" data-rib="velocidad">🏃 Velocidad</button>
+          <button class="station-btn lime" data-rib="flexibilidad">🤸 Flexibilidad</button>
+        </div>
+
+        <div class="capacity-card-view" id="ribDisplay">
+          <span class="meta-badge" id="ribBadge">Bomba Cardiovascular · Aeróbico / Anaeróbico</span>
+          <h3 id="ribTitle">🫀 Resistencia Cardiovascular</h3>
+          <div class="prose" id="ribText">
+            <p>
+              Es la capacidad de sostener un esfuerzo físico prolongado retrasando la fatiga. El corazón impulsa sangre oxigenada; en esfuerzos máximos el músculo entra en <b>deuda anaeróbica</b> acumulando lactato. Un atleta con resistencia posee mayor volumen sistólico y se recupera en menor tiempo.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · ENYER -->
+  <section class="slide">
+    <div class="body-layout-grid">
+      <div class="model3d-container">
+        <img id="imgEnyer" src="../imagenes/reaccion.jpg" alt="Capacidad coordinativa">
+        <div class="img-fallback" id="fbEnyer">REACCIÓN</div>
+      </div>
+
+      <div class="editorial-panel">
+        <span class="kicker">Estación 03 · Enyer 🏎️</span>
+        <h2 class="h1-hero">Capacidades <em>Coordinativas</em></h2>
+
+        <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px;">
+          <button class="station-btn active" data-eny="reaccion">⚡ Reacción</button>
+          <button class="station-btn" data-eny="equilibrio">⚖️ Equilibrio</button>
+          <button class="station-btn" data-eny="diferenciacion">🎯 Diferenciación</button>
+          <button class="station-btn" data-eny="orientacion">⏱️ Orientación & Ritmo</button>
+        </div>
+
+        <div class="capacity-card-view" id="enyDisplay">
+          <span class="meta-badge" id="enyBadge">Tiempo de Respuesta · Vía Sensorial Aferente</span>
+          <h3 id="enyTitle">⚡ Tiempo de Reacción Rápida</h3>
+          <div class="prose" id="enyText">
+            <p>
+              Es la velocidad para iniciar una respuesta motora precisa ante una señal externa. En la Fórmula 1, un piloto como Fernando Alonso o Verstappen reacciona al semáforo en apenas <b>150 milisegundos</b>: la retina capta el cambio de luz, el nervio óptico descarga al lóbulo occipital y este comanda el pie para soltar el embrague.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · EL JUEGO FINAL -->
+  <section class="slide" style="justify-content: center;">
+    <div class="batak-versus-arena">
+      <span class="kicker">Duelo en Vivo para la Clase · 2 Alumnos a la vez 🏎️⚡🏃‍♂️</span>
+      <h2 class="h1-hero" style="font-size: 32px; margin-bottom: 6px;">Batak <em>Versus</em> Táctico</h2>
+
+      <div class="versus-scoreboard">
+        <div class="vs-player-badge">
+          <span class="vs-name" style="color: var(--cyan);">Jugador 1 (Azul)</span>
+          <span class="vs-score" id="scoreP1" style="color: var(--cyan);">00</span>
+        </div>
+        <div class="vs-timer-box">
+          <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--text-muted);">Tiempo</span>
+          <span class="vs-time-val" id="vsTimer">15s</span>
+        </div>
+        <div class="vs-player-badge">
+          <span class="vs-name" style="color: var(--lime);">Jugador 2 (Verde)</span>
+          <span class="vs-score" id="scoreP2" style="color: var(--lime);">00</span>
+        </div>
+      </div>
+
+      <div class="versus-duel-stage">
+        <div class="player-court p1">
+          <div style="font-family: var(--font-d); font-size: 13px; font-weight: 700; color: var(--cyan); margin-bottom: 6px;">
+            ZONA DE REFLEJOS · P1
+          </div>
+          <div class="grid-batak-versus" id="gridP1">
+            <button class="node-v" data-p="1"><div class="node-bulb"></div></button>
+            <button class="node-v" data-p="1"><div class="node-bulb"></div></button>
+            <button class="node-v" data-p="1"><div class="node-bulb"></div></button>
+            <button class="node-v" data-p="1"><div class="node-bulb"></div></button>
+            <button class="node-v" data-p="1"><div class="node-bulb"></div></button>
+            <button class="node-v" data-p="1"><div class="node-bulb"></div></button>
+          </div>
+        </div>
+
+        <div class="player-court p2">
+          <div style="font-family: var(--font-d); font-size: 13px; font-weight: 700; color: var(--lime); margin-bottom: 6px;">
+            ZONA DE REFLEJOS · P2
+          </div>
+          <div class="grid-batak-versus" id="gridP2">
+            <button class="node-v" data-p="2"><div class="node-bulb"></div></button>
+            <button class="node-v" data-p="2"><div class="node-bulb"></div></button>
+            <button class="node-v" data-p="2"><div class="node-bulb"></div></button>
+            <button class="node-v" data-p="2"><div class="node-bulb"></div></button>
+            <button class="node-v" data-p="2"><div class="node-bulb"></div></button>
+            <button class="node-v" data-p="2"><div class="node-bulb"></div></button>
+          </div>
+        </div>
+      </div>
+
+      <div style="font-size: 14px; color: var(--text-dim); margin-bottom: 14px;" id="gameRuleNotice">
+        🟢 <b>Verde:</b> tócala (+1) y salta a otro lugar &nbsp;|&nbsp; 🔴 <b>Roja:</b> ¡no la toques! Se va sola (−1 si caes)
+      </div>
+
+      <button class="btn-game-trigger" id="btnStartVersus">
+        <span>Iniciar Duelo de 15 Segundos</span>
+      </button>
+
+      <button class="btn-unlock-podium" id="btnGoToBoard">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M6 9h4v6H6zM12 9h6v2h-6zM12 13h6v2h-6z"/></svg>
+        <span>Final del Partido · Ver Videomarcador</span>
+      </button>
+    </div>
+  </section>
+
+</main>
+
+<!-- CIERRE: EL VIDEOMARCADOR DEL ESTADIO -->
+<div id="scoreboardOverlay">
+  <div class="sb-stadium-screen">
+    <div class="sb-inner">
+
+      <div class="sb-live-strip">
+        <span><span class="live-dot">●</span> EN VIVO</span>
+        <span>ESTADIO DEL AULA</span>
+        <span>ED. FÍSICA</span>
+      </div>
+
+      <div class="led-line" id="ledTitle"></div>
+
+      <div class="sb-result" id="sbResult">
+        <div class="sb-side p1">
+          <div class="rs-name">Jugador 1</div>
+          <div class="rs-score" id="rsP1">0</div>
+        </div>
+        <div class="sb-score-sep">—</div>
+        <div class="sb-side p2">
+          <div class="rs-name">Jugador 2</div>
+          <div class="rs-score" id="rsP2">0</div>
+        </div>
+      </div>
+
+      <div class="sb-winner-line" id="sbWinner"></div>
+
+      <div class="sb-mvp">
+        <div class="led-line sb-mvp-title" id="ledMvp"></div>
+        <div class="mvp-row">
+          <div class="mvp-card" id="mvp1">
+            <div class="mvp-pos">Estación 01</div>
+            <div class="mvp-name">Guelmi</div>
+            <div class="mvp-role">Director Técnico</div>
+            <div class="mvp-rating">94</div>
+          </div>
+          <div class="mvp-card" id="mvp2">
+            <div class="mvp-pos">Estación 02</div>
+            <div class="mvp-name">Ribert</div>
+            <div class="mvp-role">Motor Cardio</div>
+            <div class="mvp-rating">92</div>
+          </div>
+          <div class="mvp-card" id="mvp3">
+            <div class="mvp-pos">Estación 03</div>
+            <div class="mvp-name">Enyer</div>
+            <div class="mvp-role">Piloto F1</div>
+            <div class="mvp-rating">96</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sb-ticker" id="sbTicker">
+        <div class="sb-ticker-track" id="tickerTrack"></div>
+      </div>
+    </div>
+
+    <div class="sb-actions" id="sbActions">
+      <button class="btn-restart-session" id="btnRestartAll">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 12a9 9 0 1 0 3-6.7M3 4v5h5"/></svg>
+        <span>Repetir la Sesión Completa</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   EDUCACIÓN FÍSICA — compuerta + intro EKG modular + estaciones
+   + Batak (un objetivo activo por lado) + videomarcador LED
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ================= AUDIO ================= */
+let AC = null, soundOn = true;
+function ensureAudio() {
+  try {
+    if (!AC) AC = new (window.AudioContext || window.webkitAudioContext)();
+    if (AC.state === 'suspended') AC.resume();
+  } catch (e) { AC = null; }
+}
+try { addEventListener('pointerdown', ensureAudio, { once: true, capture: true }); } catch (e) {}
+
+function beep(freq = 440, dur = 0.1, gain = 0.12, type = 'sine') {
+  if (!soundOn || !AC) return;
+  try {
+    const o = AC.createOscillator(), g = AC.createGain();
+    o.type = type; o.frequency.value = freq;
+    o.connect(g); g.connect(AC.destination);
+    const t = AC.currentTime;
+    g.gain.setValueAtTime(gain, t);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.start(t); o.stop(t + dur + 0.02);
+  } catch (e) {}
+}
+function noiseBurst(dur, freq, gain, type = 'bandpass') {
+  if (!soundOn || !AC) return;
+  try {
+    const buf = AC.createBuffer(1, Math.floor(AC.sampleRate * dur), AC.sampleRate);
+    const d = buf.getChannelData(0);
+    for (let i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / d.length, 1.6);
+    const src = AC.createBufferSource(); src.buffer = buf;
+    const f = AC.createBiquadFilter(); f.type = type; f.frequency.value = freq; f.Q.value = 0.8;
+    const g = AC.createGain(); g.gain.value = gain;
+    src.connect(f); f.connect(g); g.connect(AC.destination);
+    src.start();
+  } catch (e) {}
+}
+function sHydraulic() { noiseBurst(0.45, 400, 0.3, 'lowpass'); }
+function sAccessGranted() { beep(880, .1); setTimeout(() => beep(1320, .16), 130); }
+function sGood() { beep(920, .08, .14, 'square'); }
+function sTrap() { beep(160, .22, .16, 'sawtooth'); }
+function sCount() { beep(660, .09, .13); }
+function sGo() { beep(990, .2, .16); }
+function sLedChar(i) { beep(700 + i * 26, .05, .08, 'square'); }
+function sScoreTick() { beep(1200, .04, .1, 'square'); }
+function sPowerOn() { noiseBurst(.6, 900, .18); beep(60, .5, .18, 'sawtooth'); beep(2200, .08, .06, 'square'); }
+function sFanfare() {
+  const seq = [[523, 0], [659, 140], [784, 280], [1047, 420]];
+  seq.forEach(([f, d]) => setTimeout(() => beep(f, .22, .15), d));
+  setTimeout(() => beep(1047, .5, .16), 640);
+}
+function applause(dur) {
+  if (!soundOn || !AC) return;
+  try {
+    const now = AC.currentTime, n = 26;
+    for (let i = 0; i < n; i++) {
+      const t = now + Math.random() * (dur || 1.6) * 0.9;
+      const buf = AC.createBuffer(1, Math.floor(AC.sampleRate * 0.05), AC.sampleRate);
+      const d = buf.getChannelData(0);
+      for (let j = 0; j < d.length; j++) d[j] = (Math.random() * 2 - 1) * Math.pow(1 - j / d.length, 2);
+      const src = AC.createBufferSource(); src.buffer = buf;
+      const f = AC.createBiquadFilter();
+      f.type = 'bandpass'; f.frequency.value = 900 + Math.random() * 1800; f.Q.value = 0.9;
+      const g = AC.createGain();
+      g.gain.setValueAtTime(.13 + Math.random() * .1, t);
+      src.connect(f); f.connect(g); g.connect(AC.destination);
+      src.start(t);
+    }
+  } catch (e) {}
+}
+
+const sndBtn = document.getElementById('sndBtn');
+sndBtn.addEventListener('click', () => {
+  ensureAudio(); soundOn = !soundOn;
+  document.body.classList.toggle('muted', !soundOn);
+});
+
+/* ================= PANTALLA COMPLETA (robusta) ================= */
+function isFs() {
+  return !!(document.fullscreenElement || document.webkitFullscreenElement ||
+            document.mozFullScreenElement || document.msFullscreenElement);
+}
+function tryFs(el) {
+  try {
+    if (el.requestFullscreen) { var p = el.requestFullscreen(); return p && p.then ? p : Promise.resolve(); }
+    if (el.webkitRequestFullscreen) { el.webkitRequestFullscreen(); return Promise.resolve(); }
+    if (el.mozRequestFullScreen) { el.mozRequestFullScreen(); return Promise.resolve(); }
+    if (el.msRequestFullscreen) { el.msRequestFullscreen(); return Promise.resolve(); }
+  } catch (e) {}
+  return Promise.reject(new Error('no-fs'));
+}
+function tryExitFs() {
+  try {
+    if (document.exitFullscreen) { var p = document.exitFullscreen(); return p && p.then ? p : undefined; }
+    if (document.webkitExitFullscreen) { document.webkitExitFullscreen(); return; }
+    if (document.mozCancelFullScreen) { document.mozCancelFullScreen(); return; }
+    if (document.msExitFullscreen) { document.msExitFullscreen(); return; }
+  } catch (e) {}
+}
+const fsBtn = document.getElementById('fsBtn');
+fsBtn.addEventListener('click', () => {
+  ensureAudio();
+  if (isFs()) { tryExitFs(); return; }
+  tryFs(document.documentElement).catch(() => {
+    tryFs(document.body).catch(() => beep(200, .2, .1));
+  });
+});
+['fullscreenchange', 'webkitfullscreenchange', 'mozfullscreenchange', 'MSFullscreenChange'].forEach(ev =>
+  document.addEventListener(ev, () => {
+    document.body.classList.toggle('is-fullscreen', isFs());
+  })
+);
+
+/* ================= COMPUERTA BIOMÉTRICA ================= */
+const doorsGate = document.getElementById('doorsGate');
+const btnScanPalm = document.getElementById('btnScanPalm');
+const sealCenter = document.getElementById('sealCenter');
+const scannerLabel = document.getElementById('scannerLabel');
+let gateOpened = false;
+
+function openGate() {
+  if (gateOpened || doorsGate.classList.contains('opened')) return;
+  gateOpened = true;
+  scannerLabel.textContent = 'ACCESO CONCEDIDO · SESIÓN INICIADA';
+  sAccessGranted();
+  setTimeout(() => {
+    sHydraulic();
+    doorsGate.classList.add('opened');
+    if (typeof playEKG === 'function') setTimeout(playEKG, 600);
+  }, 420);
+}
+btnScanPalm.addEventListener('click', openGate);
+sealCenter.addEventListener('click', openGate);
+doorsGate.addEventListener('click', e => {
+  if (e.target === btnScanPalm || sealCenter.contains(e.target)) return;
+  openGate();
+});
+
+/* ================= NAVEGACIÓN ================= */
+const deck = document.getElementById('deck');
+const slides = document.querySelectorAll('.slide');
+const totalSlides = slides.length;
+const dotsRail = document.getElementById('dotsRail');
+const curNum = document.getElementById('curNum');
+const totNum = document.getElementById('totNum');
+const pBar = document.getElementById('pBar');
+const btnPrev = document.getElementById('btnPrev');
+const btnNext = document.getElementById('btnNext');
+
+totNum.textContent = String(totalSlides).padStart(2, '0');
+for (let i = 0; i < totalSlides; i++) {
+  const d = document.createElement('button');
+  d.className = 'dot-pill';
+  d.setAttribute('aria-label', 'Ir a diapositiva ' + (i + 1));
+  d.addEventListener('click', () => goToSlide(i));
+  dotsRail.appendChild(d);
+}
+const dots = [...dotsRail.children];
+
+let currentSlide = 0;
+function goToSlide(index) {
+  if (index < 0 || index >= totalSlides) return;
+  slides[currentSlide].classList.remove('active');
+  dots[currentSlide].classList.remove('active');
+  currentSlide = index;
+  slides[currentSlide].classList.add('active');
+  dots[currentSlide].classList.add('active');
+  slides[index].scrollTop = 0;
+  curNum.textContent = String(index + 1).padStart(2, '0');
+  pBar.style.width = ((index + 1) / totalSlides * 100) + '%';
+  btnPrev.disabled = index === 0;
+  btnNext.disabled = index === totalSlides - 1;
+}
+function nextSlide() { goToSlide(currentSlide + 1); }
+function prevSlide() { goToSlide(currentSlide - 1); }
+btnPrev.addEventListener('click', prevSlide);
+btnNext.addEventListener('click', nextSlide);
+
+document.addEventListener('keydown', e => {
+  if (document.getElementById('scoreboardOverlay').classList.contains('active')) {
+    if (e.key === 'Escape') restartAll();
+    return;
+  }
+  const tag = e.target.tagName;
+  if (tag === 'BUTTON' || tag === 'INPUT' || tag === 'TEXTAREA') return;
+  const k = e.key;
+  if (k === 'ArrowRight' || k === ' ' || k === 'PageDown') { e.preventDefault(); nextSlide(); }
+  else if (k === 'ArrowLeft' || k === 'PageUp') { e.preventDefault(); prevSlide(); }
+  else if (/^[1-9]$/.test(k) && +k <= totalSlides) goToSlide(+k - 1);
+});
+
+let tsx = 0, tsy = 0;
+deck.addEventListener('touchstart', e => { tsx = e.touches[0].clientX; tsy = e.touches[0].clientY; }, { passive: true });
+deck.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - tsx, dy = e.changedTouches[0].clientY - tsy;
+  if (Math.abs(dx) > 60 && Math.abs(dy) < 60) (dx < 0 ? nextSlide() : prevSlide());
+}, { passive: true });
+
+document.querySelectorAll('[data-jump]').forEach(cp => {
+  cp.addEventListener('click', () => goToSlide(parseInt(cp.dataset.jump)));
+});
+document.getElementById('btnGoToIndex').addEventListener('click', () => goToSlide(1));
+
+/* ================= ESTACIONES (Ribert / Enyer) ================= */
+const RIB = {
+  resistencia: {
+    img: 'resistencia.jpg', fb: 'RESISTENCIA',
+    badge: 'Bomba Cardiovascular · Aeróbico / Anaeróbico',
+    title: '🫀 Resistencia Cardiovascular',
+    text: '<p>Es la capacidad de sostener un esfuerzo físico prolongado retrasando la fatiga. El corazón impulsa sangre oxigenada; en esfuerzos máximos el músculo entra en <b>deuda anaeróbica</b> acumulando lactato. Un atleta con resistencia posee mayor volumen sistólico y se recupera en menor tiempo.</p>'
+  },
+  fuerza: {
+    img: 'fuerza.jpg', fb: 'FUERZA',
+    badge: 'Tensión Muscular · Fibras Rápidas Tipo II',
+    title: '⚡ Fuerza Muscular',
+    text: '<p>Es la capacidad neuromuscular de vencer o contrarrestar una resistencia externa mediante la contracción muscular. Depende del número de <b>fibras tipo II</b> reclutadas y de la coordinación intermuscular. Un levantador olímpico activa más del 80% de las unidades motoras del cuádriceps de forma sincronizada para despegar la barra del suelo.</p>'
+  },
+  velocidad: {
+    img: 'velocidad.jpg', fb: 'VELOCIDAD',
+    badge: 'Ciclo de Movimiento · Máxima Potencia',
+    title: '🏃 Velocidad de Desplazamiento',
+    text: '<p>Es la capacidad de ejecutar acciones motrices en el <b>menor tiempo posible</b>. Se compone de dos fases: el tiempo de reacción (interpretar la señal) y la velocidad de movimiento (ciclo de contracción muscular). Usain Bolt cubrió los 100 metros llanos en 9.58 segundos: 12.2 pasos por segundo a 44 km/h de velocidad punta.</p>'
+  },
+  flexibilidad: {
+    img: 'flexibilidad.jpg', fb: 'FLEXIBILIDAD',
+    badge: 'Amplitud Articular · Elasticidad Muscular',
+    title: '🤸 Flexibilidad',
+    text: '<p>Es la <b>amplitud máxima de movimiento</b> de una articulación, determinada por la elasticidad de músculos, tendones y ligamentos. Una gimnasta artística entrena la hiperextensión controlada de sus articulaciones durante horas: sin flexibilidad, la ejecución técnica de sus elementos se vuelve físicamente imposible.</p>'
+  }
+};
+const ENY = {
+  reaccion: {
+    img: 'reaccion.jpg', fb: 'REACCIÓN',
+    badge: 'Tiempo de Respuesta · Vía Sensorial Aferente',
+    title: '⚡ Tiempo de Reacción Rápida',
+    text: '<p>Es la velocidad para iniciar una respuesta motora precisa ante una señal externa. En la Fórmula 1, un piloto como Fernando Alonso o Verstappen reacciona al semáforo en apenas <b>150 milisegundos</b>: la retina capta el cambio de luz, el nervio óptico descarga al lóbulo occipital y este comanda el pie para soltar el embrague.</p>'
+  },
+  equilibrio: {
+    img: 'equilibrio.webp', fb: 'EQUILIBRIO',
+    badge: 'Control Postural · Sistema Vestibular',
+    title: '⚖️ Equilibrio',
+    text: '<p>Es la capacidad de mantener el cuerpo en posición estable, ya sea <b>estática</b> (una pose) o <b>dinámica</b> (en movimiento). El sistema vestibular del oído interno detecta micro-desplazamientos y corrige la postura en milisegundos. Un ciclista de pista derrapa a 60 km/h apoyando una rodilla: su oído interno recalcula el centro de gravedad más de 100 veces por segundo.</p>'
+  },
+  diferenciacion: {
+    img: 'diferenciacion.jpg', fb: 'DIFERENCIACIÓN',
+    badge: 'Ajuste Fino · Precisión Motora',
+    title: '🎯 Diferenciación',
+    text: '<p>Es la capacidad de graduar con <b>precisión</b> la fuerza y el ritmo de un movimiento. Un jugador de billar profesional ajusta el golpe con diferencias de gramos de fuerza; un lanzador de béisbol imprime 14 tipos distintos de giro a la pelota con la misma muñeca. La clave está en el ajuste fino de la tensión muscular.</p>'
+  },
+  orientacion: {
+    img: 'orientacion.jpg', fb: 'ORIENTACIÓN',
+    badge: 'Espacio-Tiempo · Estructura Rítmica',
+    title: '⏱️ Orientación y Ritmo',
+    text: '<p>Es la capacidad de ubicarse en el <b>espacio y el tiempo</b> y de sincronizar el movimiento con estructuras rítmicas externas. Un bailarín de salsa procesa el tempo del tambor y anticipa el aterrizaje del paso siguiente; un corredor de 800 metros dosifica su zancada al ritmo de la campana de vuelta final.</p>'
+  }
+};
+
+function setStationImage(imgEl, fallbackEl, file, fbText) {
+  fallbackEl.classList.remove('show');
+  fallbackEl.textContent = fbText;
+  imgEl.style.opacity = '0';
+  imgEl.onerror = () => {
+    imgEl.onerror = null;
+    imgEl.removeAttribute('src');
+    imgEl.style.opacity = '1';
+    fallbackEl.classList.add('show');
+  };
+  setTimeout(() => {
+    imgEl.src = '../imagenes/' + file;
+    if (imgEl.complete && imgEl.naturalWidth > 0) imgEl.style.opacity = '1';
+    else imgEl.onload = () => { imgEl.style.opacity = '1'; };
+  }, 180);
+}
+
+const imgRibert = document.getElementById('imgRibert');
+const fbRibert = document.getElementById('fbRibert');
+document.querySelectorAll('[data-rib]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('[data-rib]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const d = RIB[btn.dataset.rib];
+    document.getElementById('ribBadge').textContent = d.badge;
+    document.getElementById('ribTitle').textContent = d.title;
+    document.getElementById('ribText').innerHTML = d.text;
+    setStationImage(imgRibert, fbRibert, d.img, d.fb);
+    beep(740, .07, .08);
+  });
+});
+imgRibert.onerror = () => { imgRibert.onerror = null; fbRibert.classList.add('show'); };
+
+const imgEnyer = document.getElementById('imgEnyer');
+const fbEnyer = document.getElementById('fbEnyer');
+document.querySelectorAll('[data-eny]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('[data-eny]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const d = ENY[btn.dataset.eny];
+    document.getElementById('enyBadge').textContent = d.badge;
+    document.getElementById('enyTitle').textContent = d.title;
+    document.getElementById('enyText').innerHTML = d.text;
+    setStationImage(imgEnyer, fbEnyer, d.img, d.fb);
+    beep(740, .07, .08);
+  });
+});
+imgEnyer.onerror = () => { imgEnyer.onerror = null; fbEnyer.classList.add('show'); };
+
+/* ═══════════ BATAK VERSUS — UN objetivo activo por lado ═══════════ */
+const scoreP1El = document.getElementById('scoreP1');
+const scoreP2El = document.getElementById('scoreP2');
+const vsTimerEl = document.getElementById('vsTimer');
+const btnStartVersus = document.getElementById('btnStartVersus');
+const btnGoToBoard = document.getElementById('btnGoToBoard');
+const gameRuleNotice = document.getElementById('gameRuleNotice');
+const nodesP1 = [...document.querySelectorAll('#gridP1 .node-v')];
+const nodesP2 = [...document.querySelectorAll('#gridP2 .node-v')];
+
+let vsRunning = false, vsS1 = 0, vsS2 = 0, vsTime = 15;
+let vsTimerT = 0;
+let redTO1 = 0, redTO2 = 0;
+
+function paintScores() {
+  scoreP1El.textContent = String(vsS1).padStart(2, '0');
+  scoreP2El.textContent = String(vsS2).padStart(2, '0');
+}
+function clearSide(nodes, side) {
+  nodes.forEach(n => n.classList.remove('target-green', 'target-red'));
+  if (side === 1) clearTimeout(redTO1);
+  else clearTimeout(redTO2);
+}
+function clearAllTargets() {
+  clearSide(nodesP1, 1);
+  clearSide(nodesP2, 2);
+}
+function spawnNext(nodes, side, forceGreen) {
+  clearSide(nodes, side);
+  const node = nodes[Math.floor(Math.random() * nodes.length)];
+  const isRed = !forceGreen && Math.random() < 0.25;
+  node.classList.add(isRed ? 'target-red' : 'target-green');
+  if (isRed) {
+    const to = setTimeout(() => {
+      node.classList.remove('target-red');
+      spawnNext(nodes, side, true);
+    }, 800);
+    if (side === 1) redTO1 = to; else redTO2 = to;
+  }
+}
+
+nodesP1.forEach(n => n.addEventListener('pointerdown', () => hitNode(n, 1)));
+nodesP2.forEach(n => n.addEventListener('pointerdown', () => hitNode(n, 2)));
+
+function hitNode(node, side) {
+  if (!vsRunning) return;
+  const nodes = side === 1 ? nodesP1 : nodesP2;
+  if (node.classList.contains('target-green')) {
+    node.classList.remove('target-green');
+    if (side === 1) vsS1++; else vsS2++;
+    paintScores();
+    sGood();
+    spawnNext(nodes, side, false);
+  } else if (node.classList.contains('target-red')) {
+    node.classList.remove('target-red');
+    if (side === 1) clearTimeout(redTO1); else clearTimeout(redTO2);
+    if (side === 1) vsS1 = Math.max(0, vsS1 - 1); else vsS2 = Math.max(0, vsS2 - 1);
+    paintScores();
+    sTrap();
+    spawnNext(nodes, side, true);
+  }
+}
+
+btnStartVersus.addEventListener('click', () => {
+  if (vsRunning) return;
+  ensureAudio();
+  vsS1 = 0; vsS2 = 0; vsTime = 15;
+  paintScores();
+  clearAllTargets();
+  btnStartVersus.style.display = 'none';
+  btnGoToBoard.classList.remove('show');
+  gameRuleNotice.innerHTML = '🚦 <b>Preparados…</b>';
+
+  let cd = 3;
+  const cdT = setInterval(() => {
+    if (cd > 0) {
+      gameRuleNotice.innerHTML = '🚦 <b>' + cd + '…</b>';
+      sCount();
+      cd--;
+    } else {
+      clearInterval(cdT);
+      gameRuleNotice.innerHTML = '🏁 <b>¡GO!</b> Verde +1 · Roja −1 si caes';
+      sGo();
+      startDuel();
+    }
+  }, 850);
+});
+
+function startDuel() {
+  vsRunning = true;
+  spawnNext(nodesP1, 1, false);
+  spawnNext(nodesP2, 2, false);
+  vsTimerT = setInterval(() => {
+    vsTime--;
+    vsTimerEl.textContent = vsTime + 's';
+    if (vsTime <= 3 && vsTime > 0) sCount();
+    if (vsTime <= 0) endDuel();
+  }, 1000);
+}
+
+function endDuel() {
+  vsRunning = false;
+  clearInterval(vsTimerT);
+  clearAllTargets();
+  vsTimerEl.textContent = '0s';
+  sGo();
+  setTimeout(() => {
+    let verdict;
+    if (vsS1 > vsS2) verdict = '🏆 <b>¡JUGADOR 1 GANA ' + vsS1 + ' — ' + vsS2 + '!</b>';
+    else if (vsS2 > vsS1) verdict = '🏆 <b>¡JUGADOR 2 GANA ' + vsS2 + ' — ' + vsS1 + '!</b>';
+    else verdict = '🤝 <b>EMPATE ' + vsS1 + ' — ' + vsS2 + '</b> · revancha disponible';
+    gameRuleNotice.innerHTML = '⏱ <b>¡TIEMPO!</b> ' + verdict + ' — toca el botón dorado para el final';
+    applause(1.6);
+    btnGoToBoard.classList.add('show');
+    btnStartVersus.style.display = '';
+    btnStartVersus.querySelector('span').textContent = 'Revancha (otro duelo de 15s)';
+  }, 400);
+}
+
+/* ═══════════ EL VIDEOMARCADOR DEL ESTADIO ═══════════ */
+const sbOverlay = document.getElementById('scoreboardOverlay');
+const ledTitle = document.getElementById('ledTitle');
+const ledMvp = document.getElementById('ledMvp');
+const sbResult = document.getElementById('sbResult');
+const rsP1 = document.getElementById('rsP1');
+const rsP2 = document.getElementById('rsP2');
+const sbWinner = document.getElementById('sbWinner');
+const sbTicker = document.getElementById('sbTicker');
+const tickerTrack = document.getElementById('tickerTrack');
+const sbActions = document.getElementById('sbActions');
+
+const TICKER_MSG = 'GRACIAS POR SU ASISTENCIA ★★ EDUCACIÓN FÍSICA ★★ LAS CAPACIDADES FÍSICAS ★★ ESTADIO DEL AULA ★★ ';
+tickerTrack.textContent = TICKER_MSG + TICKER_MSG;
+
+function typeLED(el, text, speed, done) {
+  el.innerHTML = '';
+  const chars = [...text];
+  chars.forEach(c => {
+    const s = document.createElement('span');
+    s.className = 'ch';
+    s.textContent = c === ' ' ? '\u00A0' : c;
+    el.appendChild(s);
+  });
+  const spans = el.querySelectorAll('.ch');
+  spans.forEach((s, i) => {
+    setTimeout(() => {
+      s.classList.add('on');
+      sLedChar(i);
+    }, i * (speed || 55));
+  });
+  if (done) setTimeout(done, chars.length * (speed || 55) + 250);
+}
+
+function countLED(el, target, dur) {
+  const t0 = performance.now();
+  (function step(t) {
+    const p = Math.min(1, (t - t0) / dur);
+    const v = Math.round(target * (1 - Math.pow(1 - p, 3)));
+    el.textContent = v;
+    if (p < 1) {
+      requestAnimationFrame(step);
+      if (Math.random() < .5) sScoreTick();
+    }
+  })(t0);
+}
+
+function playScoreboard() {
+  ledTitle.innerHTML = '';
+  ledMvp.innerHTML = '';
+  sbResult.classList.remove('in');
+  sbWinner.classList.remove('in');
+  sbWinner.textContent = '';
+  rsP1.textContent = '0'; rsP2.textContent = '0';
+  ['mvp1', 'mvp2', 'mvp3'].forEach(id => document.getElementById(id).classList.remove('in'));
+  sbTicker.classList.remove('run');
+  sbActions.classList.remove('in');
+
+  sbOverlay.classList.add('active');
+  ensureAudio();
+  sPowerOn();
+
+  setTimeout(() => { typeLED(ledTitle, 'FINAL DEL PARTIDO', 55); }, 950);
+  setTimeout(() => {
+    sbResult.classList.add('in');
+    countLED(rsP1, vsS1, 700);
+    setTimeout(() => countLED(rsP2, vsS2, 700), 260);
+  }, 3100);
+  setTimeout(() => {
+    let msg;
+    if (vsS1 > vsS2) msg = '▶ GANADOR: JUGADOR 1 ◀';
+    else if (vsS2 > vsS1) msg = '▶ GANADOR: JUGADOR 2 ◀';
+    else msg = 'EMPATE TÉCNICO · REVANCHA EN LA PRÓXIMA CLASE';
+    sbWinner.textContent = msg;
+    sbWinner.classList.add('in');
+    sFanfare();
+    setTimeout(() => applause(2.2), 500);
+  }, 4700);
+  setTimeout(() => {
+    typeLED(ledMvp, 'MVP DE LA EXPOSICIÓN', 40);
+    setTimeout(() => { document.getElementById('mvp1').classList.add('in'); beep(760, .1); }, 400);
+    setTimeout(() => { document.getElementById('mvp2').classList.add('in'); beep(860, .1); }, 650);
+    setTimeout(() => { document.getElementById('mvp3').classList.add('in'); beep(980, .12); }, 900);
+  }, 5900);
+  setTimeout(() => {
+    sbTicker.classList.add('run');
+    sbActions.classList.add('in');
+  }, 7200);
+}
+btnGoToBoard.addEventListener('click', playScoreboard);
+
+/* ================= REINICIO TOTAL ================= */
+function restartAll() {
+  sbOverlay.classList.remove('active');
+  gateOpened = false;
+  doorsGate.classList.remove('opened');
+  scannerLabel.textContent = 'TOCAR PARA DESBLOQUEAR SESIÓN';
+  vsRunning = false;
+  clearInterval(vsTimerT);
+  clearAllTargets();
+  vsS1 = 0; vsS2 = 0; vsTime = 15;
+  paintScores();
+  vsTimerEl.textContent = '15s';
+  btnGoToBoard.classList.remove('show');
+  btnStartVersus.style.display = '';
+  btnStartVersus.querySelector('span').textContent = 'Iniciar Duelo de 15 Segundos';
+  gameRuleNotice.innerHTML = '🟢 <b>Verde:</b> tócala (+1) y salta a otro lugar &nbsp;|&nbsp; 🔴 <b>Roja:</b> ¡no la toques! Se va sola (−1 si caes)';
+  document.querySelector('[data-rib="resistencia"]').click();
+  document.querySelector('[data-eny="reaccion"]').click();
+  goToSlide(0);
+}
+document.getElementById('btnRestartAll').addEventListener('click', restartAll);
+
+/* arranque */
+paintScores();
+goToSlide(0);
+</script>
+</body>
+</html>
