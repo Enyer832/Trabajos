@@ -754,7 +754,7 @@ body:not(.is-fullscreen) .ic-fs-exit { display: none; }
   <section class="slide">
     <div class="body-layout-grid">
       <div class="model3d-container">
-        <img id="imgRibert" src="imagenes/resistencia.jpg" alt="Capacidad física">
+        <img id="imgRibert" src="educacion-fisica/imagenes/resistencia.jpg" alt="Capacidad física">
         <div class="img-fallback" id="fbRibert">RESISTENCIA</div>
       </div>
 
@@ -786,7 +786,7 @@ body:not(.is-fullscreen) .ic-fs-exit { display: none; }
   <section class="slide">
     <div class="body-layout-grid">
       <div class="model3d-container">
-        <img id="imgEnyer" src="imagenes/reaccion.jpg" alt="Capacidad coordinativa">
+        <img id="imgEnyer" src="educacion-fisica/imagenes/reaccion.jpg" alt="Capacidad coordinativa">
         <div class="img-fallback" id="fbEnyer">REACCIÓN</div>
       </div>
 
@@ -1219,7 +1219,7 @@ function setStationImage(imgEl, fallbackEl, file, fbText) {
     fallbackEl.classList.add('show');
   };
   setTimeout(() => {
-    imgEl.src = 'imagenes/' + file;
+    imgEl.src = 'educacion-fisica/imagenes/' + file;
     if (imgEl.complete && imgEl.naturalWidth > 0) imgEl.style.opacity = '1';
     else imgEl.onload = () => { imgEl.style.opacity = '1'; };
   }, 180);
