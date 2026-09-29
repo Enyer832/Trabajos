@@ -313,7 +313,7 @@ body.card-open .ec-prev,body.card-open .ec-next{display:grid}
   <div class="grain"></div>
 </div>
 
-<!-- HUD: solo visible en laboratorio y juego -->
+<!-- HUD -->
 <div class="hud" id="hud">
   <div class="badge"><i></i><span>Química · Bloque p</span></div>
   <div class="hud-actions">
@@ -544,6 +544,7 @@ const introVideo=document.getElementById('introVideo');
 const introTap=document.getElementById('introTap');
 const blueFade=document.getElementById('blueFade');
 const tablePhase=document.getElementById('tablePhase');
+const hud=document.getElementById('hud');
 const teamBar=document.getElementById('teamBar');
 let tableStarted=false;
 
@@ -563,6 +564,7 @@ function startTable(){
   setTimeout(()=>introPhase.classList.add('closing'),350);
   setTimeout(()=>{
     tablePhase.classList.add('live');
+    hud.classList.add('show');
     teamBar.classList.add('show');
     blueFade.classList.remove('on');
     sWhoosh();
@@ -773,7 +775,6 @@ const labBack=document.getElementById('labBack');
 const expVideo=document.getElementById('expVideo');
 const labCover=document.getElementById('labCover');
 const chipLab=document.getElementById('chipLab');
-const hud=document.getElementById('hud');
 let labOpen=false,labMounted=false;
 
 function openLab(){
