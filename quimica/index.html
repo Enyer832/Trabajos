@@ -265,6 +265,40 @@ body.card-open .ec-prev,body.card-open .ec-next{display:grid}
   .team-bar{gap:5px;bottom:6px}
   .tb-chip{font-size:9px;padding:8px 10px}
 }
+
+  /* ═══ EFECTO respuesta CORRECTA: destello dorado ═══ */
+.gopt.right{
+  animation:optRight .7s var(--ease);
+  border-color:var(--gold) !important;
+  background:rgba(255,209,102,.15) !important;
+  box-shadow:0 0 40px var(--gold-glow),0 0 80px var(--gold-glow);
+  transform:scale(1.08);
+}
+@keyframes optRight{
+  0%{transform:scale(1)}
+  30%{transform:scale(1.12) translateY(-8px)}
+  50%{transform:scale(1.08) translateY(-4px)}
+  70%{transform:scale(1.1) translateY(-6px)}
+  100%{transform:scale(1.08) translateY(0)}
+}
+
+/* ═══ EFECTO respuesta INCORRECTA: sacudida + apagado gradual ═══ */
+.gopt.wrong{
+  animation:optWrong .5s ease-out;
+  filter:grayscale(1) brightness(.5);
+  opacity:.2;
+  border-color:var(--coral) !important;
+}
+@keyframes optWrong{
+  0%{transform:translateX(0);opacity:1;filter:none}
+  15%{transform:translateX(-10px) rotate(-1deg);opacity:1;filter:none}
+  30%{transform:translateX(10px) rotate(1deg);opacity:1;filter:none}
+  45%{transform:translateX(-7px) rotate(-.5deg);opacity:1;filter:none}
+  60%{transform:translateX(7px) rotate(.5deg);opacity:1;filter:none}
+  75%{transform:translateX(-4px);opacity:.5;filter:grayscale(.5)}
+  100%{transform:translateX(0);opacity:.2;filter:grayscale(1) brightness(.5)}
+}
+  
 </style>
 </head>
 <body>
@@ -784,6 +818,8 @@ let wi=0,wCorrect=0,wWrong=0;
 
 function renderWho(){
   const Q=WHO[wi];
+  const d=ELEMENTOS[Q.sym];
+  const col=PCOLOR[d.team];
   gNum.textContent=wi+1;
   gVoice.textContent=Q.voice;
   gMsg.className='gmsg';gMsg.innerHTML='';
@@ -806,10 +842,11 @@ function renderWho(){
 function whoAnswer(btn,ok,Q){
   const d=ELEMENTOS[Q.sym];
   if(ok){
-    /* correcta: brilla, avanza */
+    /* correcta: efecto brillo intenso + sube + avanza */
     wCorrect++;
+    btn.style.pointerEvents='none';
     btn.classList.add('right');
-    [...gOpts.children].forEach(x=>{x.style.pointerEvents='none';if(x!==btn)x.style.opacity=.3});
+    [...gOpts.children].forEach(x=>{if(x!==btn)x.style.opacity=.3});
     const col=PCOLOR[d.team];
     gMsg.innerHTML=`<b style="color:${col}">¡Soy ${d.nombre}!</b> — ${d.cap}`;
     gMsg.classList.add('show');
@@ -820,15 +857,14 @@ function whoAnswer(btn,ok,Q){
       else showSummary();
     },1800);
   } else {
-    /* incorrecta: sacude, se apaga esa opción, NO avanza */
+    /* incorrecta: sacude, se apaga esa opción, NO avanza, NO muestra nada extra */
     wWrong++;
     btn.classList.add('wrong');
     btn.style.pointerEvents='none';
     btn.style.opacity=.25;
-    gMsg.innerHTML=`<span style="color:var(--coral)">No soy ese…</span> pista: tengo <b>${d.n}</b> protones. ¿Quién soy?`;
-    gMsg.classList.add('show');
     sBad();
     /* NO avanza — se queda esperando la correcta */
+    /* NO muestra mensaje de pista — solo el efecto visual de sacudida */
   }
 }
 function showSummary(){
