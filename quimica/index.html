@@ -298,6 +298,9 @@ body.card-open .ec-prev,body.card-open .ec-next{display:grid}
   75%{transform:translateX(-4px);opacity:.5;filter:grayscale(.5)}
   100%{transform:translateX(0);opacity:.2;filter:grayscale(1) brightness(.5)}
 }
+
+/* FIX: el atributo hidden debe ganar sobre display:flex */
+[hidden]{display:none !important}
   
 </style>
 </head>
@@ -544,6 +547,16 @@ const tablePhase=document.getElementById('tablePhase');
 const teamBar=document.getElementById('teamBar');
 let tableStarted=false;
 
+/* Verificar que el video existe antes de intentar reproducirlo */
+introVideo.addEventListener('loadeddata',()=>{
+  console.log('✅ Video cargó correctamente:', introVideo.videoWidth+'x'+introVideo.videoHeight);
+});
+introVideo.addEventListener('error',()=>{
+  console.error('❌ Video NO cargó. Ruta buscada:', introVideo.src);
+  toast('⚠️ Video no encontrado — revisa que "videos/video-de-quimica.mp4" exista');
+  startTable(); /* sigue sin video */
+});
+
 function startTable(){
   if(tableStarted)return;tableStarted=true;
   blueFade.classList.add('on');
@@ -556,20 +569,24 @@ function startTable(){
   },1000);
   setTimeout(dimWave,2800);
 }
-/* UN SOLO click — con plan B si el video no carga */
+/* UN SOLO click — espera a que el video cargue */
 let tapFired=false;
 document.getElementById('tapStart').addEventListener('click',()=>{
   if(tapFired)return;tapFired=true;
   ensureAudio();
   introTap.classList.add('off');
   introVideo.currentTime=0;
-  introVideo.play().catch(()=>startTable());
+  introVideo.play().then(()=>{
+    console.log('▶️ Video reproduciéndose');
+  }).catch(err=>{
+    console.error('Error al reproducir:',err);
+    toast('No pude reproducir el video — saltando a la tabla');
+    startTable();
+  });
 });
 introVideo.addEventListener('ended',startTable);
-introVideo.addEventListener('error',startTable);
-/* si el video tarda demasiado (por red o cache), seguimos */
-setTimeout(()=>{if(!tableStarted)startTable()},15000);
-
+/* si tarda más de 10 segundos (video muy grande o no carga), seguimos */
+setTimeout(()=>{if(!tableStarted)startTable()},10000);
 /* ═══ TABLA ═══ */
 const periodic=document.getElementById('periodic');
 const cells={},bgCells=[];
