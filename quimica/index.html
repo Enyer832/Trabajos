@@ -827,16 +827,7 @@ function whoAnswer(btn,ok,Q){
     sBad();
     /* NO avanza — se queda en la misma pregunta */
   }
-  /* el contador de pregunta sube siempre (bien o mal) tras un breve delay */
-  setTimeout(()=>{
-    if(wi<WHO.length-1){
-      wi++;
-      renderWho();
-    } else {
-      showSummary();
-    }
-  },1800);
-}
+  
 function showSummary(){
   gOpts.innerHTML='';
   gVoice.textContent='';
