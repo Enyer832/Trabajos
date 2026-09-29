@@ -66,7 +66,7 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
 #blueFade{position:fixed;inset:0;z-index:110;background:linear-gradient(180deg,#0a3a5c,#1a6a8a);opacity:0;pointer-events:none;transition:opacity .5s}
 #blueFade.on{opacity:1}
 
-/* ═══ HUD — solo visible en laboratorio y juego ═══ */
+/* ═══ HUD ═══ */
 .hud{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:clamp(12px,2.2vh,22px) clamp(16px,3vw,44px);pointer-events:none;opacity:0;visibility:hidden;transition:opacity .5s,visibility 0s .5s}
 .hud.show{opacity:1;visibility:visible;transition:opacity .5s}
 .hud>*{pointer-events:auto}
@@ -99,25 +99,24 @@ body:not(.fs) .ic-fs-out{display:none}
 #tablePhase.live .periodic-wrap{transform:scale(1) translateY(0);opacity:1}
 .periodic{position:relative;display:grid;grid-template-columns:repeat(18,1fr);grid-template-rows:repeat(7,1fr);gap:clamp(2px,.35vw,5px);width:min(1220px,94vw);height:min(62vh,580px)}
 
-/* ═══ Estilos base de los elementos — EXACTOS de la v1 ═══ */
+/* ═══ Estilos base de los elementos ═══ */
 .el{position:relative;border-radius:clamp(3px,.5vw,7px);border:1px solid rgba(64,224,208,.1);background:rgba(10,20,28,.4);display:flex;align-items:center;justify-content:center;transition:opacity 1.2s var(--ease),filter 1.2s var(--ease),transform .25s var(--ease),box-shadow .25s;min-width:0;min-height:0}
 .el .sym{font-family:var(--font-d);font-weight:700;font-size:clamp(10px,1.15vw,17px);line-height:1}
 .el .num{font-family:var(--font-d);font-size:clamp(5px,.45vw,8px);color:var(--muted);position:absolute;top:2px;left:3px}
 .el.dimmed{opacity:.15;filter:saturate(.1)}
 
-/* Colores por persona (aplicados como variables inline en JS) */
 .el.act{cursor:pointer}
 .el.act:hover{transform:scale(1.15);z-index:3;box-shadow:0 0 20px var(--glow)}
 .el.act .sym{color:var(--color);text-shadow:0 0 12px var(--glow)}
 
-/* ═══ Efecto Neon Pulsante (.spot) — EXACTO de la v1 ═══ */
+/* ═══ Neon Pulsante ═══ */
 .el.spot{animation:neonPulse 1.6s infinite ease-in-out;z-index:2}
 @keyframes neonPulse{
   0%,100%{transform:scale(1);box-shadow:0 0 14px var(--glow)}
   50%{transform:scale(1.13);box-shadow:0 0 36px var(--glow),inset 0 0 14px var(--glow)}
 }
 
-/* ═══ Efecto Elemento Seleccionado (.chosen) — EXACTO de la v1 ═══ */
+/* ═══ Elemento Seleccionado ═══ */
 .el.chosen{position:fixed!important;left:6vw!important;top:50%!important;transform:translateY(-50%) scale(1.05)!important;width:clamp(110px,13vw,180px)!important;height:clamp(110px,13vw,180px)!important;z-index:30;border-width:3px!important;transition:all .9s var(--ease)!important;display:flex!important;align-items:center;justify-content:center!important;box-shadow:0 0 60px var(--glow)!important}
 .el.chosen .sym{font-size:clamp(44px,5.5vw,72px)!important;text-shadow:0 0 30px currentColor}
 .el.chosen .num{font-size:clamp(12px,1vw,16px)!important;color:var(--dim)!important}
@@ -169,13 +168,13 @@ body.card-open .ec-prev,body.card-open .ec-next{display:grid}
 .tc-prose{margin-top:14px;font-size:clamp(15px,1.5vw,18.5px);line-height:1.7;color:var(--dim)}
 .tc-prose b{color:var(--text);font-weight:600}
 .tc-elems{margin-top:20px;display:flex;gap:10px;flex-wrap:wrap}
-.tc-elem{display:flex;align-items:center;gap:8px;padding:10px 16px;border-radius:12px;border:1.5px solid var(--tc)55;font-family:var(--font-d);font-size:15px;font-weight:700;cursor:pointer;transition:.25s var(--ease);color:var(--tc)}
-.tc-elem:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 0 20px var(--tc-glow)}
-.tc-elem .ts{font-size:1.2em;text-shadow:0 0 10px var(--tc)}
+.tc-elem{display:flex;align-items:center;gap:8px;padding:10px 16px;border-radius:12px;border:1.5px solid;font-family:var(--font-d);font-size:15px;font-weight:700;cursor:pointer;transition:.25s var(--ease)}
+.tc-elem:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 0 20px currentColor}
+.tc-elem .ts{font-size:1.2em;text-shadow:0 0 10px currentColor}
 .tc-elem .tn{font-size:11px;font-weight:500;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
 .tc-close{margin-top:22px;text-align:center}
-.tc-close button{font-family:var(--font-d);font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:13px 30px;border-radius:99px;border:1.5px solid var(--tc);color:var(--tc);background:transparent;transition:.25s}
-.tc-close button:hover{background:var(--tc)12;box-shadow:0 0 20px var(--tc-glow)}
+.tc-close button{font-family:var(--font-d);font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:13px 30px;border-radius:99px;border:1.5px solid currentColor;color:var(--tc);background:transparent;transition:.25s}
+.tc-close button:hover{box-shadow:0 0 20px currentColor}
 
 /* ═══ LABORATORIO ═══ */
 #labPhase{position:fixed;inset:0;z-index:60;background:linear-gradient(160deg,#071019,#04080D);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:clamp(50px,7vh,80px) clamp(16px,3vw,40px) clamp(80px,10vh,100px);overflow-y:auto;scrollbar-width:none;opacity:0;visibility:hidden;transform:translateX(100%);transition:opacity .7s var(--ease),transform .8s var(--ease),visibility 0s .8s}
@@ -196,8 +195,7 @@ body.card-open .ec-prev,body.card-open .ec-next{display:grid}
 .lab-cap{margin-top:14px;font-size:clamp(13.5px,1.4vw,16px);color:var(--dim);text-align:center;max-width:70ch;font-style:italic}
 .lab-next{display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:#04080D;font-family:var(--font-d);font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:14px 30px;border-radius:99px;box-shadow:0 10px 26px rgba(255,209,102,.35);transition:.25s;margin-top:18px}
 .lab-next:hover{transform:scale(1.05)}
-.lab-back{position:fixed;top:clamp(62px,8vh,96px);left:clamp(14px,2.5vw,36px);z-index:61;width:54px;height:54px;border-radius:50%;border:1px solid var(--border);background:var(--panel);backdrop-filter:blur(14px);display:none;place-items:center;transition:.25s}
-#labPhase.open ~ .lab-back{display:grid}
+.lab-back{position:fixed;top:clamp(62px,8vh,96px);left:clamp(14px,2.5vw,36px);z-index:61;width:54px;height:54px;border-radius:50%;border:1px solid var(--border);background:var(--panel);backdrop-filter:blur(14px);display:grid;place-items:center;transition:.25s}
 .lab-back:hover{border-color:var(--teal);color:var(--teal);transform:scale(1.08)}
 
 /* ═══ JUEGO ═══ */
@@ -229,8 +227,7 @@ body.card-open .ec-prev,body.card-open .ec-next{display:grid}
 .gbtn{display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:#04080D;font-family:var(--font-d);font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:14px 30px;border-radius:99px;box-shadow:0 10px 26px rgba(255,209,102,.35);transition:.25s;margin-top:10px}
 .gbtn:hover{transform:scale(1.05)}
 .gbtn.teal{background:var(--teal);box-shadow:0 10px 26px var(--teal-glow)}
-.game-back{position:fixed;top:clamp(62px,8vh,96px);left:clamp(14px,2.5vw,36px);z-index:71;width:54px;height:54px;border-radius:50%;border:1px solid var(--border);background:var(--panel);backdrop-filter:blur(14px);display:none;place-items:center;transition:.25s}
-#gamePhase.open ~ .game-back{display:grid}
+.game-back{position:fixed;top:clamp(62px,8vh,96px);left:clamp(14px,2.5vw,36px);z-index:71;width:54px;height:54px;border-radius:50%;border:1px solid var(--border);background:var(--panel);backdrop-filter:blur(14px);display:grid;place-items:center;transition:.25s}
 .game-back:hover{border-color:var(--teal);color:var(--teal);transform:scale(1.08)}
 /* resumen final */
 .gsummary{margin-top:18px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
@@ -406,9 +403,12 @@ body.card-open .ec-prev,body.card-open .ec-next{display:grid}
 </div>
 
 <script>
+/* ═══════════════════════════════════════════════════════
+   CONFIGURACIÓN — rutas corregidas a VIDEOS (con S)
+   ═══════════════════════════════════════════════════════ */
 const INTRO_VIDEO='videos/video-de-quimica.mp4';
 const EXP_YT=false;
-const EXP_URL='video/experimento.mp4';
+const EXP_URL='videos/experimento.mp4';
 
 const PCOLOR={liseth:'#C5D3DE',yamelis:'#40E0D0',enyer:'#FFB454',alexandrina:'#B78CFF',greiliana:'#FFD166'};
 const PGLOW={liseth:'rgba(197,211,222,.35)',yamelis:'rgba(64,224,208,.4)',enyer:'rgba(255,180,84,.4)',alexandrina:'rgba(183,140,255,.4)',greiliana:'rgba(255,209,102,.4)'};
@@ -427,52 +427,53 @@ const TEMAS={
     desc:'<p>El <b>oxígeno</b> es el 21% del aire. El <b>carbono</b> es el arquitecto de la vida. Juntos sostienen cada respiración.</p><p>Greiliana presenta a los <b>elementos de la vida diaria</b> y conduce al laboratorio.</p>'}
 };
 
+/* ═══ ELEMENTOS — con rutas de imágenes ═══ */
 const ELEMENTOS={
-  H:{n:1,nombre:'Hidrógeno',team:'liseth',row:1,col:1,img:'',cap:'Referencia del bloque s',
+  H:{n:1,nombre:'Hidrógeno',team:'liseth',row:1,col:1,img:'fotos/hidrogeno.jpg',cap:'Referencia del bloque s',
     t:'<p>El más abundante del universo. No es del bloque p, pero hoy lo obtendremos por electrólisis: <b>2 partes por cada 1 de oxígeno</b>.</p>'},
-  B:{n:5,nombre:'Boro',team:'liseth',row:2,col:13,img:'',cap:'Vidrio Pyrex',
+  B:{n:5,nombre:'Boro',team:'liseth',row:2,col:13,img:'fotos/boro.jpg',cap:'Vidrio Pyrex',
     t:'<p>Metaloide del grupo 13. Endurece el <b>vidrio Pyrex</b> — del horno al agua fría sin quebrarse.</p>'},
-  Al:{n:13,nombre:'Aluminio',team:'liseth',row:3,col:13,img:'',cap:'El metal de todos los días',
+  Al:{n:13,nombre:'Aluminio',team:'liseth',row:3,col:13,img:'fotos/aluminio.jpg',cap:'El metal de todos los días',
     t:'<p>El metal más abundante de la corteza. Latas, aviones, papel aluminio: liviano, no se oxida y <b>reciclarlo gasta 5% de la energía</b>.</p>'},
-  Ga:{n:31,nombre:'Galio',team:'liseth',row:4,col:13,img:'',cap:'Se derrite en tu mano',
+  Ga:{n:31,nombre:'Galio',team:'liseth',row:4,col:13,img:'fotos/galio.jpg',cap:'Se derrite en tu mano',
     t:'<p>Se derrite a 29.8 °C: apriétalo y se vuelve líquido. Con él se fabrican los <b>LED</b> de pantallas y bombillas.</p>'},
 
-  N:{n:7,nombre:'Nitrógeno',team:'yamelis',row:2,col:15,img:'',cap:'El 78% del aire',
+  N:{n:7,nombre:'Nitrógeno',team:'yamelis',row:2,col:15,img:'fotos/nitrogeno.jpg',cap:'El 78% del aire',
     t:'<p>El 78% del aire. Tan estable que "no hace nada" — hasta que las plantas lo capturan y de él nacen las <b>proteínas y el ADN</b>.</p>'},
-  P:{n:15,nombre:'Fósforo',team:'yamelis',row:3,col:15,img:'',cap:'El que brilla solo',
+  P:{n:15,nombre:'Fósforo',team:'yamelis',row:3,col:15,img:'fotos/fosforo.jpg',cap:'El que brilla solo',
     t:'<p>Descubierto en 1669 al destilar orina: brillaba en la oscuridad. Está en el <b>ATP</b> y en tus huesos.</p>'},
-  S:{n:16,nombre:'Azufre',team:'yamelis',row:3,col:16,img:'',cap:'El amarillo volcánico',
+  S:{n:16,nombre:'Azufre',team:'yamelis',row:3,col:16,img:'fotos/azufre.jpg',cap:'El amarillo volcánico',
     t:'<p>Amarillo de cráteres. Hoy vulcaniza las llantas y produce el <b>ácido sulfúrico</b>, el químico más usado del mundo.</p>'},
-  Se:{n:34,nombre:'Selenio',team:'yamelis',row:4,col:16,img:'',cap:'Fotocopiadoras',
+  Se:{n:34,nombre:'Selenio',team:'yamelis',row:4,col:16,img:'fotos/selenio.jpg',cap:'Fotocopiadoras',
     t:'<p>Conduce electricidad solo bajo la luz — el corazón de las fotocopiadoras. Tu tiroides lo necesita.</p>'},
 
-  Si:{n:14,nombre:'Silicio',team:'enyer',row:3,col:14,img:'',cap:'El cerebro de tus dispositivos',
+  Si:{n:14,nombre:'Silicio',team:'enyer',row:3,col:14,img:'fotos/silicio.jpg',cap:'El cerebro de tus dispositivos',
     t:'<p>El 25% de la corteza. El semiconductor de <b>cada chip</b>: arena purificada que piensa. El Valle del Silicio le debe el nombre.</p>'},
-  Ge:{n:32,nombre:'Germanio',team:'enyer',row:4,col:14,img:'',cap:'El primer transistor',
+  Ge:{n:32,nombre:'Germanio',team:'enyer',row:4,col:14,img:'fotos/germanio.jpg',cap:'El primer transistor',
     t:'<p>Protagonista del <b>primer transistor</b> (1947). Hoy convierte luz en señal en las fibras de internet.</p>'},
-  Sn:{n:50,nombre:'Estaño',team:'enyer',row:5,col:14,img:'',cap:'Protege las latas',
+  Sn:{n:50,nombre:'Estaño',team:'enyer',row:5,col:14,img:'fotos/estano.jpg',cap:'Protege las latas',
     t:'<p>Con cobre hizo el <b>bronce</b> — y toda una Edad antigua lleva su nombre. Hoy forra las latas sin corrosión.</p>'},
-  Pb:{n:82,nombre:'Plomo',team:'enyer',row:6,col:14,img:'',cap:'El denso de la historia',
+  Pb:{n:82,nombre:'Plomo',team:'enyer',row:6,col:14,img:'fotos/plomo.jpg',cap:'El denso de la historia',
     t:'<p>Denso, blando, tóxico — los romanos lo pusieron en cañerías. Hoy: baterías y escudo anti-radiación.</p>'},
 
-  F:{n:9,nombre:'Flúor',team:'alexandrina',row:2,col:17,img:'',cap:'El más reactivo',
+  F:{n:9,nombre:'Flúor',team:'alexandrina',row:2,col:17,img:'fotos/fluor.jpg',cap:'El más reactivo',
     t:'<p>El elemento más reactivo de la tabla: ataca hasta el vidrio. Controlado, protege: el <b>fluoruro de la pasta dental</b>.</p>'},
-  Cl:{n:17,nombre:'Cloro',team:'alexandrina',row:3,col:17,img:'',cap:'El médico del agua',
+  Cl:{n:17,nombre:'Cloro',team:'alexandrina',row:3,col:17,img:'fotos/cloro.jpg',cap:'El médico del agua',
     t:'<p>Tóxico puro que salvó millones: <b>clorar el agua</b> eliminó el tifus y el cólera. La sal es cloro + sodio.</p>'},
-  I:{n:53,nombre:'Yodo',team:'alexandrina',row:5,col:17,img:'',cap:'El antiséptico violeta',
+  I:{n:53,nombre:'Yodo',team:'alexandrina',row:5,col:17,img:'fotos/yodo.jpg',cap:'El antiséptico violeta',
     t:'<p>La <b>tintura de yodo</b> es el antiséptico clásico. Sin yodo, tu tiroides no fabrica hormonas.</p>'},
-  He:{n:2,nombre:'Helio',team:'alexandrina',row:1,col:18,img:'',cap:'El de los globos',
+  He:{n:2,nombre:'Helio',team:'alexandrina',row:1,col:18,img:'fotos/helio.jpg',cap:'El de los globos',
     t:'<p>Descubierto en el <b>Sol antes que en la Tierra</b>. Globos, y el líquido que enfría resonancias magnéticas.</p>'},
-  Ne:{n:10,nombre:'Neón',team:'alexandrina',row:2,col:18,img:'',cap:'La luz de la ciudad',
+  Ne:{n:10,nombre:'Neón',team:'alexandrina',row:2,col:18,img:'fotos/neon.jpg',cap:'La luz de la ciudad',
     t:'<p>Electricidad + neón a baja presión = el <b>letrero luminoso</b> de toda la historia del cine.</p>'},
 
-  C:{n:6,nombre:'Carbono',team:'greiliana',row:2,col:14,img:'',cap:'El elemento de la vida',
+  C:{n:6,nombre:'Carbono',team:'greiliana',row:2,col:14,img:'fotos/carbono.jpg',cap:'El elemento de la vida',
     t:'<p>El arquitecto de la vida: forma 4 enlaces y construye cadenas infinitas. <b>Diamante y grafito</b> son el mismo elemento.</p>'},
-  O:{n:8,nombre:'Oxígeno',team:'greiliana',row:2,col:16,img:'',cap:'El motor de respirar',
+  O:{n:8,nombre:'Oxígeno',team:'greiliana',row:2,col:16,img:'fotos/oxigeno.jpg',cap:'El motor de respirar',
     t:'<p>El 21% del aire. <b>Respirar es una combustión lenta</b>. Dos átomos = O₂; tres = ozono.</p>'},
-  In:{n:49,nombre:'Indio',team:'greiliana',row:5,col:13,img:'',cap:'Las pantallas táctiles',
+  In:{n:49,nombre:'Indio',team:'greiliana',row:5,col:13,img:'fotos/indio.jpg',cap:'Las pantallas táctiles',
     t:'<p>Su óxido cubre <b>toda pantalla táctil</b>: sin él, tu celular no sabría dónde pones el dedo.</p>'},
-  Ar:{n:18,nombre:'Argón',team:'greiliana',row:3,col:18,img:'',cap:'El escudo invisible',
+  Ar:{n:18,nombre:'Argón',team:'greiliana',row:3,col:18,img:'fotos/argon.jpg',cap:'El escudo invisible',
     t:'<p>Casi el 1% del aire. Su superpoder es la indiferencia: llena bombillas y <b>protege soldaduras</b> del oxígeno.</p>'}
 };
 
@@ -490,7 +491,7 @@ document.getElementById('sndBtn').addEventListener('click',()=>{ensureAudio();so
 const toastEl=document.getElementById('toast');let toastT;
 function toast(m){toastEl.textContent=m;toastEl.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>toastEl.classList.remove('show'),2400);}
 
-/* ── Pantalla completa (robusta) ── */
+/* ── Pantalla completa ── */
 function isFs(){return !!(document.fullscreenElement||document.webkitFullscreenElement||document.mozFullScreenElement||document.msFullscreenElement)}
 function tryFs(el){try{if(el.requestFullscreen){var p=el.requestFullscreen();return p&&p.then?p:Promise.resolve()}if(el.webkitRequestFullscreen){el.webkitRequestFullscreen();return Promise.resolve()}if(el.mozRequestFullScreen){el.mozRequestFullScreen();return Promise.resolve()}if(el.msRequestFullscreen){el.msRequestFullscreen();return Promise.resolve()}}catch(e){}return Promise.reject(new Error('no'))}
 document.getElementById('fsBtn').addEventListener('click',()=>{
@@ -521,7 +522,7 @@ function startTable(){
   },1000);
   setTimeout(dimWave,2800);
 }
-/* UN SOLO click */
+/* UN SOLO click — con plan B si el video no carga */
 let tapFired=false;
 document.getElementById('tapStart').addEventListener('click',()=>{
   if(tapFired)return;tapFired=true;
@@ -532,6 +533,8 @@ document.getElementById('tapStart').addEventListener('click',()=>{
 });
 introVideo.addEventListener('ended',startTable);
 introVideo.addEventListener('error',startTable);
+/* si el video tarda demasiado (por red o cache), seguimos */
+setTimeout(()=>{if(!tableStarted)startTable()},15000);
 
 /* ═══ TABLA ═══ */
 const periodic=document.getElementById('periodic');
@@ -558,7 +561,6 @@ const DECOR=[
     const d=ELEMENTOS[sym];
     const cell=document.createElement('div');
     cell.className='el act';
-    /* VARIABLES CSS por persona — así los efectos funcionan con su color */
     cell.style.setProperty('--color',PCOLOR[d.team]);
     cell.style.setProperty('--glow',PGLOW[d.team]);
     cell.style.gridRow=d.row;cell.style.gridColumn=d.col;
@@ -568,7 +570,6 @@ const DECOR=[
     periodic.appendChild(cell);
   });
 })();
-/* onda difuminada + pulso presentación */
 function dimWave(){
   const cx=15.5,cy=4;
   bgCells.forEach(cell=>{
@@ -668,6 +669,8 @@ function openTeamCard(team){
     const d=ELEMENTOS[sym];
     const b=document.createElement('button');
     b.className='tc-elem';
+    b.style.borderColor=col+'55';
+    b.style.color=col;
     b.innerHTML=`<span class="ts">${sym}</span><span><span style="font-size:13px">${d.nombre}</span><span class="tn" style="display:block">Z = ${d.n}</span></span>`;
     b.addEventListener('click',()=>{
       closeTeamCard();
@@ -688,7 +691,7 @@ function closeTeamCard(){
 }
 document.getElementById('tcClose').addEventListener('click',closeTeamCard);
 
-/* ═══ CHIPS ═══ */
+/* ═══ CHIPS DEL EQUIPO ═══ */
 let activeTeam=null;
 function highlightTeam(team){
   activeTeam=team;
@@ -751,7 +754,7 @@ labBack.addEventListener('click',closeLab);
 labCover.addEventListener('click',()=>{labCover.classList.add('off');expVideo.play().catch(()=>{})});
 expVideo.addEventListener('ended',()=>labCover.classList.remove('off'));
 
-/* ═══ JUEGO — contador de preguntas, resumen al final ═══ */
+/* ═══ JUEGO — solo avanza al acertar ═══ */
 const gamePhase=document.getElementById('gamePhase');
 const gameBack=document.getElementById('gameBack');
 const gVoice=document.getElementById('gVoice');
@@ -803,21 +806,21 @@ function renderWho(){
 function whoAnswer(btn,ok,Q){
   const d=ELEMENTOS[Q.sym];
   if(ok){
-    /* correcta: bloquea todas, brilla, sube y avanza */
-    [...gOpts.children].forEach(x=>{x.style.pointerEvents='none';if(x!==btn)x.style.opacity=.3});
-    btn.classList.add('right');
+    /* correcta: brilla, avanza */
     wCorrect++;
+    btn.classList.add('right');
+    [...gOpts.children].forEach(x=>{x.style.pointerEvents='none';if(x!==btn)x.style.opacity=.3});
     const col=PCOLOR[d.team];
     gMsg.innerHTML=`<b style="color:${col}">¡Soy ${d.nombre}!</b> — ${d.cap}`;
     gMsg.classList.add('show');
     sGood();
-    /* avanza tras el acierto */
+    /* avanza SOLO al acertar */
     setTimeout(()=>{
       if(wi<WHO.length-1){wi++;renderWho();}
       else showSummary();
     },1800);
   } else {
-    /* incorrecta: sacude, se apaga esa opción, se queda esperando la correcta */
+    /* incorrecta: sacude, se apaga esa opción, NO avanza */
     wWrong++;
     btn.classList.add('wrong');
     btn.style.pointerEvents='none';
@@ -825,9 +828,9 @@ function whoAnswer(btn,ok,Q){
     gMsg.innerHTML=`<span style="color:var(--coral)">No soy ese…</span> pista: tengo <b>${d.n}</b> protones. ¿Quién soy?`;
     gMsg.classList.add('show');
     sBad();
-    /* NO avanza — se queda en la misma pregunta */
+    /* NO avanza — se queda esperando la correcta */
   }
-  
+}
 function showSummary(){
   gOpts.innerHTML='';
   gVoice.textContent='';
