@@ -801,24 +801,31 @@ function renderWho(){
   });
 }
 function whoAnswer(btn,ok,Q){
-  /* desactiva todas para evitar más clicks */
-  [...gOpts.children].forEach(x=>x.style.pointerEvents='none');
   const d=ELEMENTOS[Q.sym];
   if(ok){
-    wCorrect++;
+    /* correcta: bloquea todas, brilla, sube y avanza */
+    [...gOpts.children].forEach(x=>{x.style.pointerEvents='none';if(x!==btn)x.style.opacity=.3});
     btn.classList.add('right');
-    [...gOpts.children].forEach(x=>{if(x!==btn)x.style.opacity=.3});
+    wCorrect++;
     const col=PCOLOR[d.team];
     gMsg.innerHTML=`<b style="color:${col}">¡Soy ${d.nombre}!</b> — ${d.cap}`;
     gMsg.classList.add('show');
     sGood();
+    /* avanza tras el acierto */
+    setTimeout(()=>{
+      if(wi<WHO.length-1){wi++;renderWho();}
+      else showSummary();
+    },1800);
   } else {
+    /* incorrecta: sacude, se apaga esa opción, se queda esperando la correcta */
     wWrong++;
     btn.classList.add('wrong');
-    btn.style.opacity=.35;
-    gMsg.innerHTML=`<span style="color:var(--coral)">No soy ese…</span> Era <b style="color:${PCOLOR[d.team]}">${d.nombre}</b>`;
+    btn.style.pointerEvents='none';
+    btn.style.opacity=.25;
+    gMsg.innerHTML=`<span style="color:var(--coral)">No soy ese…</span> pista: tengo <b>${d.n}</b> protones. ¿Quién soy?`;
     gMsg.classList.add('show');
     sBad();
+    /* NO avanza — se queda en la misma pregunta */
   }
   /* el contador de pregunta sube siempre (bien o mal) tras un breve delay */
   setTimeout(()=>{
@@ -834,13 +841,14 @@ function showSummary(){
   gOpts.innerHTML='';
   gVoice.textContent='';
   document.querySelector('.gscore').hidden=true;
-  gOk.textContent=wCorrect;
+  gOk.textContent=5;
   gNo.textContent=wWrong;
   gSummary.hidden=false;
-  gMsg.innerHTML=`Resultado: <b>${wCorrect} correctas</b> y <b>${wWrong} incorrectas</b> de 5`;
+  gMsg.innerHTML=`<b>¡Todas correctas! 5/5</b> — completaste el reto${wWrong>0?` con ${wWrong} intento${wWrong>1?'s':''} adicional${wWrong>1?'es':''}`:''}`;
   gMsg.classList.add('show');
   gFinish.hidden=false;
-  if(wCorrect===5)sGood();else applause(1.5);
+  sGood();
+  applause(2);
 }
 document.getElementById('toGame').addEventListener('click',()=>{
   closeLab();gamePhase.classList.add('open');renderWho();
