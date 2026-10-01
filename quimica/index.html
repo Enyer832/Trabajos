@@ -800,7 +800,8 @@ function closeLab(){
   labPhase.classList.remove('open');
   chipLab.classList.remove('on');
   hud.classList.remove('show');
-  labBack.style.display='grid';
+  labBack.style.display='none';
+  gameBack.style.display='none';
   try{expVideo.pause()}catch(e){}
 }
 document.getElementById('toGame').addEventListener('click',()=>{
@@ -906,7 +907,7 @@ function showSummary(){
 document.getElementById('toGame').addEventListener('click',()=>{
   closeLab();gamePhase.classList.add('open');hud.classList.add('show');labBack.style.display='none';gameBack.style.display='grid';renderWho();
 });
-gameBack.addEventListener('click',()=>{gamePhase.classList.remove('open');hud.classList.remove('show');labBack.style.display='grid';gameBack.style.display='none';});
+gameBack.addEventListener('click',()=>{gamePhase.classList.remove('open');hud.classList.remove('show');labBack.style.display='none';gameBack.style.display='none';});
 gFinish.addEventListener('click',()=>{gamePhase.classList.remove('open');hud.classList.remove('show');labBack.style.display='none';gameBack.style.display='none';openFinale()});
 
 /* ═══ CIERRE ═══ */
