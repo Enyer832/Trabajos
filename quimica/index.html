@@ -67,7 +67,8 @@ button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:n
 #blueFade.on{opacity:1}
 
 /* ═══ HUD ═══ */
-.hud{position:fixed;top:0;left:0;right:0;z-index:150;display:flex;justify-content:space-between;align-items:center;padding:clamp(12px,2.2vh,22px) clamp(16px,3vw,44px);pointer-events:none;opacity:1;visibility:visible;transition:opacity .5s}
+.hud{position:fixed;top:0;left:0;right:0;z-index:150;display:flex;justify-content:space-between;align-items:center;padding:clamp(12px,2.2vh,22px) clamp(16px,3vw,44px);pointer-events:none;opacity:0;visibility:hidden;transition:opacity .5s,visibility 0s .5s}
+.hud.show{opacity:1;visibility:visible;transition:opacity .5s}
 .hud>*{pointer-events:auto}
 .badge{display:inline-flex;align-items:center;gap:10px;background:rgba(6,12,18,.75);backdrop-filter:blur(12px);border:1px solid var(--border);border-radius:99px;padding:7px 16px}
 .badge i{width:8px;height:8px;border-radius:50%;background:var(--teal);box-shadow:0 0 9px var(--teal)}
@@ -798,6 +799,9 @@ function closeLab(){
   hud.classList.remove('show');
   try{expVideo.pause()}catch(e){}
 }
+document.getElementById('toGame').addEventListener('click',()=>{
+  closeLab();gamePhase.classList.add('open');hud.classList.add('show');renderWho();
+});
 chipLab.addEventListener('click',()=>labOpen?closeLab():openLab());
 labBack.addEventListener('click',closeLab);
 labCover.addEventListener('click',()=>{labCover.classList.add('off');expVideo.play().catch(()=>{})});
@@ -898,8 +902,8 @@ function showSummary(){
 document.getElementById('toGame').addEventListener('click',()=>{
   closeLab();gamePhase.classList.add('open');renderWho();
 });
-gameBack.addEventListener('click',()=>gamePhase.classList.remove('open'));
-gFinish.addEventListener('click',()=>{gamePhase.classList.remove('open');openFinale()});
+gameBack.addEventListener('click',()=>{gamePhase.classList.remove('open');hud.classList.remove('show');});
+gFinish.addEventListener('click',()=>{gamePhase.classList.remove('open');hud.classList.remove('show');openFinale()});
 
 /* ═══ CIERRE ═══ */
 const finale=document.getElementById('finale');
@@ -908,6 +912,7 @@ const FIN_EL=['O','C','Si','Al','Cl','Ne'];
 
 function openFinale(){
   finale.classList.add('open');
+  hud.classList.remove('show');
   finElems.innerHTML='';
   applause(1.8);
   FIN_EL.forEach((sym,i)=>{
