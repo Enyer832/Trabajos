@@ -585,8 +585,7 @@ document.getElementById('tapStart').addEventListener('click',()=>{
   });
 });
 introVideo.addEventListener('ended',startTable);
-/* si tarda más de 10 segundos (video muy grande o no carga), seguimos */
-setTimeout(()=>{if(!tableStarted)startTable()},10000);
+introVideo.addEventListener('error',startTable);
 /* ═══ TABLA ═══ */
 const periodic=document.getElementById('periodic');
 const cells={},bgCells=[];
