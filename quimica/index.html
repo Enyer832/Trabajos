@@ -195,7 +195,7 @@ body.card-open .ec-prev,body.card-open .ec-next{display:grid}
 .lab-next{display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:#04080D;font-family:var(--font-d);font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:14px 30px;border-radius:99px;box-shadow:0 10px 26px rgba(255,209,102,.35);transition:.25s;margin-top:18px}
 .lab-next:hover{transform:scale(1.05)}
 .lab-back{position:fixed;top:clamp(62px,8vh,96px);left:clamp(14px,2.5vw,36px);z-index:61;width:54px;height:54px;border-radius:50%;border:1px solid var(--border);background:var(--panel);backdrop-filter:blur(14px);display:none;place-items:center;transition:.25s}
-#labPhase.open .lab-back{display:grid}
+#tablePhase.live .lab-back,#labPhase.open .lab-back,#gamePhase.open .game-back{display:grid}
 .lab-back:hover{border-color:var(--teal);color:var(--teal);transform:scale(1.08)}
 
 /* ═══ JUEGO ═══ */
