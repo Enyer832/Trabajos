@@ -194,8 +194,7 @@ body.card-open .ec-prev,body.card-open .ec-next{display:grid}
 .lab-cap{margin-top:14px;font-size:clamp(13.5px,1.4vw,16px);color:var(--dim);text-align:center;max-width:70ch;font-style:italic}
 .lab-next{display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:#04080D;font-family:var(--font-d);font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:14px 30px;border-radius:99px;box-shadow:0 10px 26px rgba(255,209,102,.35);transition:.25s;margin-top:18px}
 .lab-next:hover{transform:scale(1.05)}
-.lab-back{position:fixed;top:clamp(62px,8vh,96px);left:clamp(14px,2.5vw,36px);z-index:61;width:54px;height:54px;border-radius:50%;border:1px solid var(--border);background:var(--panel);backdrop-filter:blur(14px);display:none;place-items:center;transition:.25s}
-#tablePhase.live .lab-back,#labPhase.open .lab-back,#gamePhase.open .game-back{display:grid}
+.lab-back{position:fixed;top:clamp(62px,8vh,96px);left:clamp(14px,2.5vw,36px);z-index:61;width:54px;height:54px;border-radius:50%;border:1px solid var(--border);background:var(--panel);backdrop-filter:blur(14px);display:grid;place-items:center;transition:.25s}
 .lab-back:hover{border-color:var(--teal);color:var(--teal);transform:scale(1.08)}
 
 /* ═══ JUEGO ═══ */
@@ -227,8 +226,7 @@ body.card-open .ec-prev,body.card-open .ec-next{display:grid}
 .gbtn{display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:#04080D;font-family:var(--font-d);font-size:14px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:14px 30px;border-radius:99px;box-shadow:0 10px 26px rgba(255,209,102,.35);transition:.25s;margin-top:10px}
 .gbtn:hover{transform:scale(1.05)}
 .gbtn.teal{background:var(--teal);box-shadow:0 10px 26px var(--teal-glow)}
-.game-back{position:fixed;top:clamp(62px,8vh,96px);left:clamp(14px,2.5vw,36px);z-index:71;width:54px;height:54px;border-radius:50%;border:1px solid var(--border);background:var(--panel);backdrop-filter:blur(14px);display:none;place-items:center;transition:.25s}
-#gamePhase.open .game-back{display:grid}
+.game-back{position:fixed;top:clamp(62px,8vh,96px);left:clamp(14px,2.5vw,36px);z-index:71;width:54px;height:54px;border-radius:50%;border:1px solid var(--border);background:var(--panel);backdrop-filter:blur(14px);display:grid;place-items:center;transition:.25s}
 .game-back:hover{border-color:var(--teal);color:var(--teal);transform:scale(1.08)}
 /* resumen final */
 .gsummary{margin-top:18px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
@@ -566,6 +564,7 @@ function startTable(){
   setTimeout(()=>{
     tablePhase.classList.add('live');
     teamBar.classList.add('show');
+    labBack.style.display='grid';
     blueFade.classList.remove('on');
     sWhoosh();
   },1000);
@@ -782,6 +781,8 @@ function openLab(){
   labPhase.classList.add('open');
   chipLab.classList.add('on');
   hud.classList.add('show');
+  labBack.style.display='grid';
+  gameBack.style.display='none';
   sWhoosh();
   if(!labMounted){
     labMounted=true;
@@ -798,6 +799,7 @@ function closeLab(){
   labPhase.classList.remove('open');
   chipLab.classList.remove('on');
   hud.classList.remove('show');
+  labBack.style.display='grid';
   try{expVideo.pause()}catch(e){}
 }
 document.getElementById('toGame').addEventListener('click',()=>{
@@ -901,10 +903,10 @@ function showSummary(){
   applause(2);
 }
 document.getElementById('toGame').addEventListener('click',()=>{
-  closeLab();gamePhase.classList.add('open');hud.classList.add('show');renderWho();
+  closeLab();gamePhase.classList.add('open');hud.classList.add('show');labBack.style.display='none';gameBack.style.display='grid';renderWho();
 });
-gameBack.addEventListener('click',()=>{gamePhase.classList.remove('open');hud.classList.remove('show');});
-gFinish.addEventListener('click',()=>{gamePhase.classList.remove('open');hud.classList.remove('show');openFinale()});
+gameBack.addEventListener('click',()=>{gamePhase.classList.remove('open');hud.classList.remove('show');labBack.style.display='grid';gameBack.style.display='none';});
+gFinish.addEventListener('click',()=>{gamePhase.classList.remove('open');hud.classList.remove('show');labBack.style.display='none';gameBack.style.display='none';openFinale()});
 
 /* ═══ CIERRE ═══ */
 const finale=document.getElementById('finale');
