@@ -564,7 +564,8 @@ function startTable(){
   setTimeout(()=>{
     tablePhase.classList.add('live');
     teamBar.classList.add('show');
-    labBack.style.display='grid';
+    labBack.style.display='none';
+    gameBack.style.display='none';
     blueFade.classList.remove('on');
     sWhoosh();
   },1000);
