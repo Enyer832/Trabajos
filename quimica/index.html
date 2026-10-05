@@ -570,7 +570,7 @@ function startTable(){
     sWhoosh();
   },1000);
   setTimeout(dimWave,2800);
-}
+                                                                                                             }
 /* UN SOLO click — espera a que el video cargue */
 let tapFired=false;
 document.getElementById('tapStart').addEventListener('click',()=>{
@@ -585,6 +585,11 @@ document.getElementById('tapStart').addEventListener('click',()=>{
     toast('No pude reproducir el video — saltando a la tabla');
     startTable();
   });
+  /* ⏱️ SEGURIDAD: a los 7 segundos avanza a la tabla aunque el video se frize */
+  setTimeout(()=>{
+    introVideo.pause();
+    startTable();
+  },8000);
 });
 introVideo.addEventListener('ended',startTable);
 introVideo.addEventListener('error',startTable);
